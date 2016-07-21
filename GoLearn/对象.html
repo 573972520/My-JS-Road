@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>对象要点</title>
+		<script type="text/javascript">
+		'use strict'  //为了避免不用var申明的变量会被视为全局变量这一缺陷，所有的JavaScript代码都应该使用strict模式。
+			/*---------------------------------------------------------*/
+			/*实际上JavaScript对象的所有属性都是字符串，不过属性对应的值可以是任意数据类型。*/
+			/*------------------------------------------------ -------*/
+			var xiaoming = {
+				name:'小明',
+				'middle-school':'NO.1 Middle School',  //属性名中包含特殊字符的，就必须用''括起来
+				weight:80,
+				score:null   //注意各属性的标点使用情况，并且最后一个属性不需要添加逗号","   如果加了，有些低版本的浏览器(如低版本的IE浏览器)会错。
+			};  //记得加上分号
+			
+			/*---------------------------------------------------------------------------*/
+			/*访问属性是通过.操作符完成的，但这要求属性名必须是一个有效的变量名。如果属性名包含特殊字符，就必须用''括起来*/
+			/*-------------------------------------------------------------------------*/
+			var name = xiaoming.name;  //访问属性通过object.prop形式来进行书写
+			alert(name);
+			var school = xiaoming['middle-school'];  //访问特殊属性值时用"['xxx']"来进行访问
+			alert(school);
+			
+			/*--------------------------------------------------*/
+			/*由于JavaScript的对象是动态类型，你可以自由地给一个对象添加或删除属性*/
+			/*-------------------------------------------------*/
+			xiaoming.age = 18;
+			alert(xiaoming.age);  //18
+			delete xiaoming.name;//相当于delete xiaoming['name'];
+			alert(xiaoming.name);  //undefined
+			
+			/*----------------------------------------*/
+			/*如果我们要检测xiaoming是否拥有某一属性，可以用in操作符*/
+			/*----------------------------------------*/
+			alert("name" in xiaoming);  //true  属性必须用引号括起来
+			alert('height' in xiaoming);  //false  属性必须用引号括起来
+			alert('toString' in xiaoming);  //true
+			/*-----------------------------------------------------------------------------------*/
+			/*不过要小心，如果in判断一个属性存在，这个属性不一定是xiaoming的，它可能是xiaoming继承得到的*/
+			/*因为toString定义在object对象中，而所有对象最终都会在原型链上指向object，所以xiaoming也拥有toString属性-*/
+			/*要判断一个属性是否是xiaoming自身拥有的，而不是继承得到的，可以用hasOwnProperty()方法*/
+			/*--------------------------------------------------------------------------------*/
+			alert(xiaoming.hasOwnProperty('name'));  //true
+			alert(xiaoming.hasOwnProperty('toString'));  //false
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

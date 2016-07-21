@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>字符串要点</title>
+		<script type="text/javascript">
+		'use strict'  //为了避免不用var申明的变量会被视为全局变量这一缺陷，所有的JavaScript代码都应该使用strict模式。
+			function myFunOne () {
+				alert('I\'m \"OK\"!');
+			}
+			function myFunTwo () {
+				var s = 'Test';
+				s[0] = 'x';  //改变字符串的第一个字符‘T’
+				alert(s);  //其结果还是原来的字符串‘Test’
+//需要特别注意的是，字符串是不可变的，如果对字符串的某个索引赋值，不会有任何错误，但是，也没有任何效果	
+			}
+			function myFunThree () {
+				var s = 'Hello';
+				var Upper = s.toUpperCase();
+				alert(Upper+'\n toUpperCase()把一个字符串全部变为大写');
+			}
+			function myFunFour () {
+				var s = 'HELLO';
+				var lower = s.toLowerCase();
+				alert(lower+'\n toLowerCase()把一个字符串全部变为小写');
+			}
+			function myFunFive () {
+				/*indexOf()会搜索指定字符串出现的位置：（从0开始，从0开始，从0开始）*/
+				var s = 'Hello, World'; //注意World前面有一个空格
+				var none = s.indexOf('world'); //没有找到的字符串，返回-1
+				var able = s.indexOf('World');
+				alert(none+'\n没有找到指定的子串，返回-1');
+				alert(able+'\n返回7');
+			}
+			function myFunSix () {
+				var s = 'Hello, World';
+				var he = s.substring(0,5);// 从索引0开始到5（不包括5），返回'hello'
+				var wo = s.substring(7); // 从索引7开始（不包括7）到结束，返回'world'
+				alert(he+'\n从索引0开始到5（不包括5），返回\'hello\'');
+				alert(wo+'\n从索引7开始（不包括7）到结束，返回\'world\'');
+			}
+			
+		</script>
+	</head>
+	<body>
+		<p>这是我的JS练习！</p>
+		<input type="button" onclick="myFunOne()" value="转义字符(\)的使用" />
+		<br />
+		<input type="button" onclick="myFunTwo()" value="字符串是不可变的" />
+		<br />
+		<input type="button" onclick="myFunThree()" value="toUpperCase" />
+		<br />
+		<input type="button" onclick="myFunFour()" value="toLowerCase" />
+		<br />
+		<input type="button" onclick="myFunFive()" value="indexOf" />
+		<br />
+		<input type="button" onclick="myFunSix()" value="substring" />
+		<br />
+	</body>
+</html>

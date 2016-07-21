@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>数组要点</title>
+		<script type="text/javascript">
+		'use strict'  //为了避免不用var申明的变量会被视为全局变量这一缺陷，所有的JavaScript代码都应该使用strict模式。
+			function myFunOne () {
+				var arr = [1,2,2.35,'Hello',null,true]; //注意数组里面的数据类型是可以随便放置的
+				var length = arr.length;
+				alert(length);
+			}
+			function myFunTwo () {
+				var arr = [1,2,3];
+				arr.length = 2;
+				alert(arr);
+				var arrTwo = [3,2];
+				arrTwo.length = 10;
+				alert(arrTwo);
+				//请注意，直接给Array的length赋一个新的值会导致Array大小的变化
+				var arrThree = ['A','B',1];
+				arrThree[6] = 10;
+				alert(arrThree);
+				//请注意，如果通过索引赋值时，索引超过了范围，同样会引起Array大小的变化
+			}
+			function indexOf () {
+				var arr = [11,2,3];
+				var index = arr.indexOf(11); // 元素11的索引为0
+				alert(index);
+				var indexNone = arr.indexOf(100);  // 元素100没有找到，返回-1
+				alert(indexNone);
+			}
+			function slice () {
+				var arr = [1,2,3,4,5,6,7,8,9];
+				alert(arr.slice(0,3));
+				alert(arr.slice(3));
+				//如果不给slice()传递任何参数，它就会从头到尾截取所有元素。利用这一点，我们可以很容易地复制一个Array
+				alert(arr.slice());
+			}
+			function push () {
+				//push()向Array的末尾添加若干元素
+				//pop()则把Array的最后一个元素删除掉
+				var arr = [1,3];
+				alert(arr.push('A','b')); //输出的是数组的长度--4
+				var pop = arr.pop();  //会将'b'元素赋值给pop
+				alert(pop); //显示b
+			}
+			function unshift () {
+				//unshift()向Array的头部添加若干元素
+				//shift()则把Array的第一个元素删除掉
+				var arr = [1,2,3,4];
+				alert(arr.unshift('A','b'));
+				var shift = arr.shift();
+				alert(shift);
+			}
+			function sort () {
+				//对当前Array进行排序
+				var arr = [1,10,3,-4];
+				arr.sort();
+				alert(arr);
+			}
+			function reverse () {
+				//把整个Array的元素给掉个个，也就是反转
+				var arr = [1,2,3,4];
+				arr.reverse();
+				alert(arr);
+			}
+			function splice () {
+				//从指定的索引开始删除若干元素，然后再从该位置添加若干元素---万能方法
+				var arr = [1,2,3,4];
+				//从索引1开始删除2个元素,然后再添加两个元素
+				arr.splice(1,2,'A','b');//返回删除的元素[2,3]
+				alert(arr);  //结果为[1,'A','b',4]
+				//只删除,不添加
+				arr.splice(1,2);  //返回删除的元素['A','b']
+				alert(arr); //结果为[1,4]
+				//只添加,不删除:
+				arr.splice(1,0,3,4);  //返回[],因为没有删除任何元素
+				alert(arr); ////结果为[1,3,4,4]
+			}
+			function concat () {
+				//把当前的Array和另一个Array连接起来，并返回一个新的Array
+				var arr = [1,2,3,4];
+				var addArr = arr.concat([5,6,7,['a','b']]);//实际上，concat()方法可以接收任意个元素和Array，并且自动把Array拆开，然后全部添加到新的Array里：
+				alert(addArr);
+				//请注意，concat()方法并没有修改当前Array，而是返回了一个新的Array。
+			}
+			function join () {
+				//把当前Array的每个元素都用指定的字符串连接起来，然后返回连接后的字符串：如果Array的元素不是字符串，将自动转换为字符串后再连接
+				var arr = ['HA','HA','f','u','c','k',1,2,3];
+				var newarr = arr.join('*');
+				alert(newarr);
+			}
+			function arrarr () {
+				var arr = [[1,2,3],[400,500],'a'];
+				var x = arr[1][1];
+				alert(x);
+			}
+		</script>
+	</head>
+	<body>
+		<p>这是我的JS练习！</p>
+		<input type="button" onclick="myFunOne()" value="获取Array的长度，直接访问length属性" />
+		<br />
+		<input type="button" onclick="myFunTwo()" value="特殊赋值的变化" />
+		<br />
+		<input type="button" onclick="indexOf()" value="indexOf" />
+		<br />
+		<input type="button" onclick="slice()" value="slice" />
+		<br />
+		<input type="button" onclick="push()" value="push和pop" />
+		<br />
+		<input type="button" onclick="unshift()" value="unshift和shift" />
+		<br />
+		<input type="button" onclick="sort()" value="sort" />
+		<br />
+		<input type="button" onclick="reverse()" value="reverse" />
+		<br />
+		<input type="button" onclick="splice()" value="splice" />
+		<br />
+		<input type="button" onclick="concat()" value="concat" />
+		<br />
+		<input type="button" onclick="join()" value="join" />
+		<br />
+		<input type="button" onclick="arrarr()" value="多维数组" />
+		<br />
+	</body>
+</html>

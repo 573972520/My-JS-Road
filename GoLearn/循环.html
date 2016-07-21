@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>循环要点</title>
+		<script type="text/javascript">
+			'use strict'  //为了避免不用var申明的变量会被视为全局变量这一缺陷，所有的JavaScript代码都应该使用strict模式。
+			/*----------------------------*/
+			/*for循环最常用的地方是利用索引来遍历数组*/
+			/*---------------------------*/
+//			var arr = ['Apple','Google','Microsoft'];
+//			var i , x;
+//			for (i=0;i<arr.length;i++) {
+//				x = arr[i];
+//				alert(x);
+//			}
+			/*----------------------------*/
+			/*for...in可以把一个对象的所有属性依次循环出来*/
+			/*---------------------------*/
+//			var chencan = {
+//				name:'陈灿',
+//				age:20,
+//				city:'YongKang'
+//			};
+//			for (var key in chencan) {                //如果不要过滤掉对象继承的属性，则删除下面的if语句
+//				if (chencan.hasOwnProperty(key)){  //要过滤掉对象继承的属性，用hasOwnProperty()来实现
+//					alert(key); //'name'  'age'  'city'
+//				}
+//			}
+
+			/*-----------------------------------------------------------------------------*/
+			/*由于Array也是对象，而它的每个元素的索引被视为对象的属性，因此，for ... in循环可以直接循环出Array的索引*/
+			/*---------------------------------------------------------------------------*/	
+			var arr = [10,'a',null,undefined,0,NaN,'',true,false];
+			for (var key in arr) {
+				alert(key);       //0 1 2 3 4 5 6 7 8
+				alert(arr[key]); //10 'a' null undefined 0 NaN '' true false
+			}
+			//请注意，for ... in对Array的循环得到的是String而不是Number。
+//			                                    ↑这里说的字符串(String)意思是for (var key in arr)里面的key,
+//												因为老师说了,Array也是对象,数组每个元素的索引相当于属性,既然说是属性,当然就是字符串啦
+//												而通过a[key]访问得到的值,该是数字就是数字,该是字符串就是字符串,
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
