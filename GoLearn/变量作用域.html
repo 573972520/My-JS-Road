@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		'use strict'
+		
+			/*---------------------------------------*/
+			/*由于JavaScript的函数可以嵌套，此时，内部函数可以访问外部函数定义的变量，反过来则不行
+			 如果内部函数和外部函数的变量名重名,则内部函数的变量将“屏蔽”外部函数的变量。
+			 因为JavaScript的函数在查找变量时从自身函数定义开始，从“内”向“外”查找。*/
+			/*---------------------------------------*/
+			function foo() {
+				var i = 1;
+				function boo() {
+					var i = 'A';
+					alert('i in boo() is' + i);  //i为A
+				}
+				alert('i in foo() is' + i); //i为1
+				boo();
+			};
+			foo();
+			
+			
+			/*---------------------------------------*/
+			/*变量作用域(比较下面两个例子)
+			 根据作用域链图中的"在变量解析过程中首先查找局部的作用域，然后查找上层作用域"，*/
+			/*---------------------------------------*/
+			
+			/*在函数a()中没有定义变量i,所以根据作用域链图中的"在变量解析过程中首先查找局部的作用域，
+			      然后查找上层作用域"，去查找上层作用域（全局作用域，即var i = 10;），进而进行输出其值*/
+			var i = 10;       //（2）这里就是上层作用域（即全局作用域）             
+/*例1*/		function a() {   //（1）未定义变量 i，从而去查找上层作用域
+				alert(i);    //（3）进而输出结果
+			};
+			a();
+			//结果输出10
+			
+			
+			/*在函数b()内定义了变量j（无论是在alter之后还是之前定义变量，都认为在此作用域拥有变量j），
+			    于是不再向上层的作用域进行查找(相当于第一句的var j = 10；没有作用)，直接输出j。但是不幸的是此时的局部变量j并没有赋值，所以输出的是undefined。*/
+			var j = 10;
+/*例2*/		function b() {
+				alert(j);
+				var j = 1;
+			};
+			/*由于JavaScript的函数定义有个特点，它会先扫描整个函数体的语句，把所有申明的变量“提升”到函数顶部，故b()函数代码相当于
+			  function b() {
+			  	var j;  //将j变量到“提升”函数顶部，但是注意，此时的j变量未赋值！！！
+				alert(j);
+				j = 1;  //要等alert(j)执行完毕后，j才被赋值！！！
+			};*/
+			b();
+			//结果输出undefined
+			/*---如果在这里添加alert(j);则会输出10---*/
+			
+			
+			
+			
+			/*以下为衍生出来的测试*/
+			 var a = "Hello";  
+			 function test(){  
+/*测试1*/			  var a;  
+			      alert(a);  //undefined  因为test()函数中已经有定义的变量a，但是变量a未赋值，故为undefined
+			      a = "World";  
+			      alert(a);  //World
+			 } 
+			 test();
+			
+			
+			 var b = "Hello";  
+			 function testS(){  
+			      alert(b);  //Hello  testS()函数中已经没有定义的变量a，使用去查找上层的作用域，即全局变量b，并且全局变量b值为Hello，故输出Hello
+/*测试2*/			  b = "World";  
+			      alert(b);  //World
+			 }  
+			 testS();
+			 
+			var c =1;  
+			   function testT(){  
+			      alert(c);  //undefined  定义了变量c，但是未赋值，故为undefined
+/*测试3*/		      var c = 2;  
+			      alert(c);  //2
+			   }  
+			   testT();  
+			   alert(c);  //1 全局变量
+			   
+			   
+			   /*当全局变量跟局部变量重名时，局部变量的scope会覆盖掉全局变量的scope，当离开局部变量的scope后，又重回到全局变量的scope，
+			    * 而当全局变量遇上局部变量时，应怎样使用全局变量呢？用window.globalVariableName。*/
+			   var a =1;  
+			    function test(){     
+			        alert(window.a);  //a为1,这里的a是全局变量哦！  
+			        var a=2;     //局部变量a在这行定义  
+/*测试4*/				alert(a);  //a为2,这里的a是局部变量哦！  
+			    }  
+			    test();  
+			    alert(a); //a为1，这里并不在function scope内，a的值为全局变量的值  
+			   
+			</script>
+	</head>
+	<body>
+	</body>
+</html>

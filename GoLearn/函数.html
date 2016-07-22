@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			'use strict'
+			/*-----------------------------------------*/
+			/*请注意，函数体内部的语句在执行时，一旦执行到return时，函数就执行完毕，并将结果返回。
+			 * 因此，函数内部通过条件判断和循环可以实现非常复杂的逻辑。
+			 * 如果没有return语句，函数执行完毕后也会返回结果，只是结果为undefined*/
+			/*---------------------------------------*/
+			function foo() {
+				return{        // 这里不会自动加分号，因为{表示语句尚未结束
+					name:"Job"
+				};  //注意return语句换行的陷阱
+			}
+			foo();
+
+			/*-----------------------------------------*/
+			/*关键字arguments，它只在函数内部起作用，并且永远指向当前函数的调用者传入的所有参数。
+			 * arguments类似Array但它不是一个Array；利用arguments，你可以获得调用者传入的所有参数。
+			 * 也就是说，即使函数不定义任何参数，还是可以拿到参数的值：*/
+			/*---------------------------------------*/
+			
+			function foo() {
+				for(var i=0; i<arguments.length; i++){
+					alert(arguments[i]);  //将arguments看成是数组，通过遍历将arguments数组的方法来获取传入的参数的值
+				}
+			}
+			foo(5,45,65);	
+//			//foo()函数说明了利用arguments可以在没有定义任何参数的情况下，获取传入的参数的值，下面的abs()函数可以让我们更加深刻的理解“arguments数组”
+//			
+			function abs() {
+				if(arguments === 0){
+					return 0;
+				}
+				var x = arguments[0];   //将arguments数组中的第一位参数符给x变量
+				return x >= 0 ? x : -x;
+			};
+			alert(abs(-1,55,44));  //输出1(第一位)
+			
+			
+			function abss() {
+				if(arguments === 0){
+					return 0;
+				}
+				var y = arguments[1];  //将arguments数组中的第二位参数符给y变量
+				return y >= 0 ? y : -y;
+			};
+			alert(abss(-1,55,44));  //输出55(第二位)
+				
+				
+			/*---------------------------------------*/
+			/*剩余参数rest是一个真正数组*/
+			/*---------------------------------------*/
+			function sum(...rest) {
+				//（1）通过forEach来实现在为定义参数的情况下，求和
+//			    var j = 0;
+//			    rest.forEach(function(element){
+//			        j = j + element;
+//			    });
+//			    return j; 
+
+			    //（2）通过for...of循环来实现在为定义参数的情况下，求和
+			    var sum = 0;
+			    for(var i of rest){
+			    	sum += i;
+			    }
+			    return sum;
+			};	
+			alert(sum(1,2,3,4)); //这里的参数随便输入
+			</script>
+	</head>
+	<body>
+	</body>
+</html>
