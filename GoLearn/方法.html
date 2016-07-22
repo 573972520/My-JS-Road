@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			'use strict'
+			/*----------------------------*/
+			/*在一个对象中绑定函数，称为这个对象的方法*/
+			/*---------------------------*/
+			var xiaoming = {
+				name:'xiaoming',
+				birth:1996,
+				age: function () {
+					var y = new Date().getFullYear();
+					return y - this.birth;
+				}
+			}
+			xiaoming.age;
+			var age = xiaoming.age();
+			alert(age);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

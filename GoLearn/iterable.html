@@ -32,7 +32,7 @@
 				alert(key);    //0,1,2,3,name  在最后一个元素会被添加进name属性
 				alert(a[key]); //1 2 2 3 Hello
 			}
-			alert('数组a的长度为：' + a.length);  //for ... in循环将把name包括在内，但Array的length属性却不包括在内
+			alert('数组a的长度为：' + a.length);  //  4    for ... in循环将把name包括在内，但Array的length属性却不包括在内
 			
 			
 			//（2）for ... of循环则完全修复了这些问题，它只循环集合本身的元素：
@@ -69,7 +69,8 @@
 			/*array.forEach(function (元素, 索引, 本身) 
 			  set.forEach(function (元素, 元素, 本身) 
 			  map.forEach(function (值, 键, 本身)
-			    名字是不固定，但是位置是固定的，如果只关心element，那么给forEach一个参数就可以，如果需要index，那么就要给两个参数，如果需要array，就要给三个，也就是这三个参数的含义是定好的。*/
+			    名字是不固定，但是位置是固定的，如果只关心element，那么给forEach一个参数就可以，
+			    如果需要index，那么就要给两个参数，如果需要array，就要给三个，也就是这三个参数的含义是定好的。*/
 		</script>
 	</head>
 	<body>
