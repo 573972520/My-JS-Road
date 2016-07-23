@@ -13,13 +13,66 @@
 				birth:1996,
 				age: function () {
 					var y = new Date().getFullYear();
-					return y - this.birth;
+					return y - this.birth; //在方法中，this始终指向当请对象，也就是xiaoming这个变量，所以this.birth可以拿到xiaoming.birth属性
 				}
 			}
 			xiaoming.age;
 			var age = xiaoming.age();
-			alert(age);
-		</script>
+			alert(age);  //20
+			
+			/*----------------------------*/
+			/*将绑定age对象里的函数单独放出来*/
+			/*---------------------------*/
+			function getAge () {
+				var y = new Date().getFullYear();
+				return y - this.birth;
+			}
+			
+			var xiaoming = {
+				name:xiaoming,
+				birth:1996,
+				age:getAge
+			}
+			
+			xiaoming.age(); //20   以对象的方法形式调用，该函数的this指向被调用的对象，也就是xiaoming，这是符合我们预期的
+			getAge();//Uncaught TypeError: Cannot read property 'birth' of undefined    但是对于单独调用函数，此时，该函数的this指向全局对象，也就是window。
+			
+			/*----------------------------*/
+			/*控制this指向--用apply修复getAge()调用
+			 apply方法，它接收两个参数，第一个参数就是需要绑定的this变量，第二个参数是Array，表示函数本身的参数。*/
+			/*---------------------------*/
+			function getAge () {
+				var y = new Date().getFullYear();
+				return y - this.birth;
+			}
+			var xiaoming = {
+				name:xiaoming,
+				birth:1996,
+				age:getAge
+			}
+			xiaoming.age(); //20
+			var x = getAge.apply(xiaoming,[]); //20 this指向xiaoming, 参数为空
+			alert(x);  //20
+			
+			/*----------------------------*/
+			/*控制this指向--用call修复getAge()调用
+			 call与apply的区别：
+			 （1）apply()把参数打包成Array再传入；
+			 （2）call()把参数按顺序传入。*/
+			/*---------------------------*/
+			function getAge () {
+				var y = new Date().getFullYear();
+				return y - this.birth;
+			}
+			var xiaoming = {
+				name:xiaoming,
+				birth:1996,
+				age:getAge
+			}
+			xiaoming.age(); //20
+			var x = getAge.call(xiaoming); //20 this指向xiaoming
+			alert(x);  //20
+	</script>
 	</head>
 	<body>
 	</body>
