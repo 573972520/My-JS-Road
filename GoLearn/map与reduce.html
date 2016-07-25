@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		'use strict'
+			/*map()方法定义在JavaScript的Array中，我们调用Array的map()方法，传入我们自己的函数，就得到了一个新的Array作为结果：*/
+			function pow(x) {
+				return x*x;
+			}
+			var arr = [1,2,3,4,5,6];
+			var ans = arr.map(pow); //map()传入的参数是pow，即函数对象本身
+			console.log(ans);
+			//把Array的所有数字转为字符串
+			var String = arr.map(String);
+			console.log(String);
+			
+			
+			/*-----------------------------------------------------------------------------------*/
+			/*reduce()方法定义在JavaScript的Array中，Array的reduce()把一个函数作用在这个Array的[x1, x2, x3...]上，
+			     这个函数必须接收两个参数，reduce()把结果继续和序列的下一个元素做累积计算，其效果就是：
+			  [x1, x2, x3, x4].reduce(f) = f(f(f(x1, x2), x3), x4)*/
+			/*-----------------------------------------------------------------------------------*/
+			
+			//对一个Array求和，就可以用reduce实现：
+			var arr = [1,2,3,4];
+			var ans = arr.reduce(function(x,y) { //必须传入两个参数
+				return x+y;
+			});
+			console.log(ans);
+
+			//利用reduce()求积
+			function product(arr) {
+				var ans = arr.reduce(function(x,y) {
+					return x*y;
+				});
+				return ans;
+			}
+			var test = product([1,2,3,4]);
+			console.log(test);
+
+
+			/*------------------------------------------------------------*/
+			/*请把用户输入的不规范的英文名字，变为首字母大写，其他小写的规范名字。
+			 * 输入：['adam', 'LISA', 'barT']，输出：['Adam', 'Lisa', 'Bart']。*/
+			/*------------------------------------------------------------*/
+			
+			//方法一
+			function str2arr(x) {
+				var lowerAll = x.toLowerCase();      //将数组里的元素全部转化为小写
+				var upperFirst = x[0].toUpperCase(); //将每个字符串的第一个位置转换成大写
+				var getLower = lowerAll.substring(1);//获取后面三个位置
+				var group = upperFirst+getLower;     //将字符串拼接起来
+				return group;
+			}
+			var s = ['adam', 'LISA', 'barT'];
+			var ans = s.map(str2arr);
+			console.log(ans);
+
+			//方法二
+			function normalize(arr) {
+				var ans = arr.map(function str2arr(x) {
+					var First = x[0].toUpperCase();
+					var last = x.toLowerCase().substring(1);
+					var group = First+last;
+					return group;
+				});
+				return ans;
+			}
+			var test = normalize(['adam', 'LISA', 'barT']);
+			console.log(test);
+			
+			/*------------------------------------------------------------*/
+			/*map 方法中的 callback 函数只需要接受一个参数，就是正在被遍历的数组元素本身。
+			 * 但这并不意味着 map 只给 callback 传了一个参数。这个思维惯性可能会让我们犯一个很容易犯的错误。*/
+			/*------------------------------------------------------------*/
+			
+			//下面的语句返回什么呢？
+			var test = ['1','2','3'].map(parseInt);
+			console.log(test); //[1,NaN,NaN]
+			// 通常使用parseInt时,只需要传递一个参数.但实际上,parseInt可以有两个参数.第二个参数是进制数.可以通过语句"alert(parseInt.length)===2"来验证.
+			// map方法在调用callback函数时,会给它传递三个参数:当前正在遍历的元素, 元素索引, 原数组本身.
+			// 第三个参数parseInt会忽视, 但第二个参数不会,也就是说,parseInt把传过来的索引值当成进制数来使用.从而返回了NaN.
+			
+			//应该使用如下的用户函数returnInt
+			function returnInt(element) {
+				return parseInt(element,10);
+			}
+			var test = ['1','2','3'].map(returnInt);
+			console.log(test); //[1,2,3]
+			
+			//或者是将parseInt改为Number，因为Number(value)函数仅接收一个参数。
+			var test = ['1','2','3'].map(Number);
+			console.log(test); //[1,2,3]
+
+			
+			
+			
+			/*------------------------------------------------------------*/
+			/*要把[1, 3, 5, 7, 9]变换成整数13579，reduce()也能派上用场：*/
+			/*------------------------------------------------------------*/
+			
+			var arr = [1, 3, 5, 7, 9];
+			var ans = arr.reduce(function(x,y) {
+				return x*10+y;
+			});
+			console.log(ans); //13579
+			
+			/*----------------------------------------------------------------------------------------*/
+			/*想办法把一个字符串13579先变成Array——[1, 3, 5, 7, 9]，再利用reduce()就可以写出一个把字符串转换为Number的函数。*/
+			/*---------------------------------------------------------------------------------------*/
+			function string2int (s) {
+				var arr = [];
+				for (var i=0; i<s.length; i++) {
+					arr.push(s[i]*1);  // 因为放入新数组中的元素仍然是string，做乘法运算后会自动转化为number,"s[i]*1"将值类型从string转换为number
+				}
+				//上面的语句表述了：将获取的字符串通过索引的方式(即s[0]、s[1]...),获取数组的单个元素，然后放入新数组中(s[0]、s[1]...)仍然是string，故做乘法运算后转化为number,
+				return arr.reduce(function(x,y) {
+					return x*10+y;
+				})
+			}
+			var test = string2int('12345');
+			console.log(test);
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
