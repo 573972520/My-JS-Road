@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head
+	<meta charset="utf-8"/>
+	<title>filter</title>
+	<script type="text/javascript">
+	'use strict'
+	/*-----------------------------------------*/
+	/*它用于把Array的某些元素过滤掉，然后返回剩下的元素。和map()类似，Array的filter()也接收一个函数。和map()不同的是，filter()把传入的函数依次作用于每个元素，然后根据返回值是true还是false决定保留还是丢弃该元素。*/
+	/*-----------------------------------------*/
+	//(1)在一个数组里面删除偶数，保留奇数
+		var arr    = [1,2,3,4,5,6,7,8,9];
+		var answer = arr.filter(function (x) {
+			return x % 2 != 0;
+		});
+		answer;
+		console.log(answer);//[1,3,5,7,9]
+	//(2)删除数组中的空字符串
+		var arr = ['A','',null,'b',undefined,''];
+		var r   = arr.filter(function (s) {
+			return s && s.trim();
+		});
+		r;
+		console.log(r); //['A','b']
+	//(3)用filter()筛选素数
+	function get_primes(arr) {
+		var ans = arr.filter(function (x) {
+			if (x == 1) {return  x= false}
+			else if (x == 2||x == 3) {return x = true}
+			else if (x%2 == 0) {return x = false}
+			else{
+				for(var i=3; i<x; i++){
+					if (i != x && x%i == 0) {x = false;}
+				}
+				if (x === false) {return x}
+					else{return x= true}
+			}
+		});
+		return ans;
+	}
+		var
+		    x,
+		    r,
+		    arr = [];
+		for (x = 1; x < 100; x++) {
+		    arr.push(x);
+		}
+		r = get_primes(arr);
+		if (r.toString() === [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97].toString()) {
+		    alert('测试通过!');
+		} else {
+		    alert('测试失败: ' + r.toString());
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>sort</title>
+	<script type="text/javascript">
+	'use strict';
+		/*---------------------------------------------------------*/
+		/*sort() 方法用于对数组的元素进行排序*/
+		/*------------------------------------------------ -------*/
+		//正常调用该方法
+		var test1 = ['Google', 'apple', 'Microsoft'].sort();
+		console.log(test1); //['Google', 'Microsoft', 'apple']
+		var test2 = [10,20,1,2].sort(); 
+		console.log(test2);  //[1,10,2,20]
+		/*出现这些不愉快的结果是因为Array的sort()方法默认把所有元素先转换为String再排序，
+		结果'10'排在了'2'的前面，因为字符'1'比字符'2'的ASCII码小*/
+
+
+		//解救方法：sort()方法也是一个高阶函数，它还可以接收一个比较函数来实现自定义的排序
+		var arr = [1,5,6,2,4,1,'a','B','A','b'];
+		//正序排列方法
+		var ans = arr.sort(function (x,y) {
+			if (x > y) {return 1;}
+			if (x < y) {return -1;}
+			return 0;
+		});
+		ans;
+		console.log(ans); //[1, 1, 2, 4, 5, 6, "A", "B", "a", "b"]
+		//倒序排列方法
+		var ans = arr.sort(function (x,y) {
+			if (x > y) {return -1;}
+			if (x < y) {return 1;}
+			return 0;
+		});
+		ans;
+		console.log(ans); //[6, 5, 4, 2, 1, 1, "b", "a", "B", "A"]
+		var arrnumber = [1,5,1,6,7,3,2,5,9,7,10,52,456];
+
+		/*----------------上述方法对于数字与字符串的排列是有效果的-----------------*/
+		/*-------------------------------------------------------------------------*/
+		/*--------------------下面的方法只对于数字的排列起效果---------------------*/
+
+		//正序排列数字的简洁方法
+		var ans = arrnumber.sort(function (x,y) {
+			return x-y;
+		});
+		ans;
+		console.log(ans); //[1, 1, 2, 4, 5, 6, "A", "B", "a", "b"]
+		//倒序排列数字的简洁方法
+		var ans = arrnumber.sort(function (x,y) {
+			return y-x;
+		});
+		ans;
+		console.log(ans); //[6, 5, 4, 2, 1, 1, "b", "a", "B", "A"]
+
+		//一些关于该方法使用的小技巧
+		//字符串的比较技巧----忽略大小写来比较两个字符串，实际上就是先把字符串都变成大写（或者都变成小写），再比较。
+		var arr = ['Google', 'apple', 'Microsoft'];
+		var ans = arr.sort(function (x,y) {
+			var s1 = x.toUpperCase();
+			var s2 = y.toUpperCase();
+			if (s1 > s2) {return 1;}
+			if (s1 < s2) {return -1;}
+			return 0;
+		});
+		console.log(ans); //[ 'apple', 'Google', 'Microsoft']
+
+		//sort()方法会直接对Array进行修改，它返回的结果仍是当前Array：
+		var s1 = ['B','C','A'];
+		var s2 = s1.sort();
+		s1;
+		s2;
+		console.log(s1); //['A','B','C'] 会将之前的数组进行修改
+		console.log(s2); //['A','B','C']
+		console.log(s1 === s2); //true
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
