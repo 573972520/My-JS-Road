@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script type="text/javascript">
-			'use strict'
+			'use strict;';
 			/*----------------------------*/
 			/*在一个对象中绑定函数，称为这个对象的方法*/
 			/*---------------------------*/
@@ -15,7 +15,7 @@
 					var y = new Date().getFullYear();
 					return y - this.birth; //在方法中，this始终指向当请对象，也就是xiaoming这个变量，所以this.birth可以拿到xiaoming.birth属性
 				}
-			}
+			};
 			xiaoming.age;
 			var age = xiaoming.age();
 			alert(age);  //20
@@ -32,7 +32,7 @@
 				name:xiaoming,
 				birth:1996,
 				age:getAge
-			}
+			};
 			
 			xiaoming.age(); //20   以对象的方法形式调用，该函数的this指向被调用的对象，也就是xiaoming，这是符合我们预期的
 			getAge();//Uncaught TypeError: Cannot read property 'birth' of undefined    但是对于单独调用函数，此时，该函数的this指向全局对象，也就是window。
@@ -49,7 +49,7 @@
 				name:xiaoming,
 				birth:1996,
 				age:getAge
-			}
+			};
 			xiaoming.age(); //20
 			var x = getAge.apply(xiaoming,[]); //20 this指向xiaoming, 参数为空
 			alert(x);  //20
@@ -68,7 +68,7 @@
 				name:xiaoming,
 				birth:1996,
 				age:getAge
-			}
+			};
 			xiaoming.age(); //20
 			var x = getAge.call(xiaoming); //20 this指向xiaoming
 			alert(x);  //20
