@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Arrow Function</title>
+	<script type="text/javascript">
+		'use strict;';
+		/*-------------------------------------------*/
+		/*箭头函数相当于匿名函数，并且简化了函数定义*/
+		/*-----------------------------------------*/
+		形式(1)只含一个表达式
+		x => x*x;
+
+		function (x) {
+			 return x*x; 
+		}
+		//上述两个函数相等
+		//形式(2)包含多条语句
+		x =>  {
+			if (x > 0) {
+				return x*x;
+			}
+			else {
+				return -x*x;
+			}
+		}
+		// 两个参数:
+		(x, y) => x * x + y * y;
+
+		// 无参数:
+		() => 3.14;
+
+		//可变参数:
+		(x, y, ...rest) => {
+			var i, sum = x+y;
+			for (i = 0; i < rest.length; i++) {
+				sum += rest[i];
+			}
+			return sum;
+		}
+		//若要返回一个对象，需要注意的是：
+		x => { foo:x }
+		//这样写会报错，因为和函数体的{ ... }有语法冲突，所以要改为：
+		x => {[ foo:x ]}
+
+		/*-------------------------------------------*/
+		/*箭头函数看上去是匿名函数的一种简写，但实际上，箭头函数和匿名函数有个明显的区别：箭头函数内部的this是词法作用域，由上下文确定*/
+		/*-----------------------------------------*/
+		var obj = {
+			birth:1996,
+			getAge:function () {
+				 var b = this.birth; //1996
+				 var fn = function () {
+				 	 return  new Data().getFullYear() - this.birth;  //这里的this指向window或者undefined
+				 } ;
+				 return fn();
+			}
+		};
+		//现在，箭头函数完全修复了this的指向，this总是指向词法作用域，也就是外层调用者obj：
+		var obj = {
+			birth:1996,
+			getAge:function () {
+				 var  b = this.birth;//1996
+				 var fn = () => new Data().getFullYear() - this.birth;//this指向obj
+				 return fn; 
+			}
+		};
+		/*-------------------------------------------*/
+		/*由于this在箭头函数中已经按照词法作用域绑定了，所以，用call()或者apply()调用箭头函数时，无法对this进行绑定，即传入的第一个参数被忽略：*/
+		/*-----------------------------------------*/
+		var obj = {
+			birth:1996,
+			getAge:function (year) {
+				 var b = this.birth,
+				 var fn = (y) => y - this.birth;
+				 return fn.call({birth:2000},year);
+			}
+		};
+		obj.getAge(2015);
+		console.log(obj.getAge(2015));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
