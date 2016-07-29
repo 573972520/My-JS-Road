@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>generator</title>
+	<script type="text/javascript">
+	'use strict;';
+		/*------------------------------------------------------------------------------------------------*/
+		/*generator（生成器）是ES6标准引入的新的数据类型。一个generator看上去像一个函数，但可以返回多次。*/
+		/*----------------------------------------------------------------------------------------------*/
+		//普通函数
+		function foo(x) {
+		     x++;
+			 // return x;   //当函数执行过程中没有return，便会返回return undefined
+		}
+		var i = foo(5);
+		console.log(i);  //undefined
+		//generator由function*定义（注意多出的*号），并且，除了return语句，还可以用yield返回多次。
+		function* foo_gen (x) {
+			yield x + 4;
+			yield x + 2;
+			return x + 3;
+		}
+		var a = foo_gen(5);
+		a.next();
+		a.next();
+		console.log(a.next());
+
+		for(var i of foo_gen(5)){
+			console.log(i);
+		}
+
+		function* test (y) {
+			 var x = yield y + 2;
+			 return x; 
+		}
+		var g = test(2);
+		console.log(g.next());
+		console.log(g.next(45));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
