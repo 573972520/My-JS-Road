@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Date</title>
+	<script type="text/javascript">
+	'use strict;';
+	/*----------------------------*/
+	/*Date对象用来表示日期和时间。*/
+	/*----------------------------*/
+	//获取系统当前时间
+	var now = new Date();
+	console.log(now);   //Sat Jul 30 2016 15:05:40 GMT+0800 (中国标准时间)
+	console.log(now.getFullYear());//年份
+	console.log(now.getMonth());  //月份
+	console.log(now.getDate());  //日 30号
+	console.log(now.getDay());  //星期  星期六
+	console.log(now.getHours());  //24小时制
+	console.log(now.getMinutes());  //分钟
+	console.log(now.getSeconds());  //秒
+	console.log(now.getMilliseconds());  //毫秒数
+	console.log(now.getTime());  //以number形式表示的时间戳
+	//创建一个指定时间--(1)
+	var d = new Date(2015,11,11,8,06,5.252); //年 月 日 时 分 秒
+	console.log(d);
+	//特别注意：0表示一月，1表示二月……
+	//创建一个指定时间--(2)
+	var b = Date.parse('2015-11-11T08:06:05.22+08:00');
+	console.log(b); //返回一个时间戳1447200365220
+	//时间戳转换为一个Date：
+	var f = new Date(1447200365220);
+	console.log(f);
+
+
+	//时区
+	var a = new Date(1447200365220);
+	var b = a.toLocaleString();  //本地时间（北京时区+8:00），显示的字符串与操作系统设定的格式有关
+	var c = a.toUTCString();  //UTC时间，与本地时间相差8小时
+	console.log(b);
+	console.log(c);
+
+	//获取当前的时间戳
+	if (Date.now) {
+		alert(Date.now());
+	}else {
+		alert(new Date().getTime());
+	}
+	//可以通过获取时间戳来让JS自动转换为当地时间
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
