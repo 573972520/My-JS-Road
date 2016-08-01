@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>RegExp</title>
+	<script type="text/javascript">
+	'use strict;';
+	/*----------*/
+	/*正则表达式*/
+	/*----------*/
+		//正则表达式的创建---第一种方式是直接通过/正则表达式/写出来，第二种方式是通过new RegExp('正则表达式')创建一个RegExp对象。
+		var r1 = /ABC\-001/;
+		var r2 = new RegExp('ABC\\-001');
+		console.log(r1);  //输出/ABC\-001/
+		console.log(r2);  //输出/ABC\-001/
+		//判断正则表达式是否匹配---RegExp对象的test()方法用于测试给定的字符串是否符合条件。
+		var r3 = /^\d{3}\-\d{3,8}$/;
+		var t1 = r3.test('010-12345');
+		var t2 = r3.test('010-1124x');
+		var t3 = r3.test('010 12324');
+		var t4 = r3.test('553-4455445');
+		console.log(t1); //true
+		console.log(t2); //false
+		console.log(t3); //false
+		console.log(t4); //true
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
