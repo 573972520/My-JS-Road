@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>浏览器对象测验</title>
+</head>
+<body>
+	<dl id="drink-menu">
+		<dt>摩卡</dt>
+		<dd>热魔卡咖啡</dd>
+		<dt>酸奶</dt>
+		<dd>老北京酸奶</dd>
+		<dt>果汁</dt>
+		<dd>鲜榨苹果汁</dd>
+	</dl>
+</body>
+<!-- 这里的JS代码必须放在body的下面不然不能读取数据！！！ -->
+	<script type="text/javascript">
+		var drinks = document.getElementsByTagName('dt');
+		var i, s;
+		s          = '提供的饮料有：';
+		for (i = 0; i < drinks.length; i++) {
+			s = s + drinks[i].innerHTML + ',';
+		}
+		alert(s);
+	</script>
+</html>
