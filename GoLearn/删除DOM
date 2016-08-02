@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>删除DOM</title>
+</head>
+<body>
+	<ul id="test-list">
+	    <li>JavaScript</li>
+	    <li>Swift</li>
+	    <li>HTML</li>
+	    <li>ANSI C</li>
+	    <li>CSS</li>
+	    <li>DirectX</li>
+	</ul>
+
+	<div>
+	    <p id="to-be-removed">First</p>
+	    <p>Second</p>
+	</div>
+
+
+	<div id="parent">
+	    <p>first</p>
+	    <p>second</p>
+	</div>
+
+</body>
+<script type="text/javascript">
+	var parent = document.getElementById("test-list");
+	parent.removeChild(parent.children[1]);
+	parent.removeChild(parent.children[2]);
+	parent.removeChild(parent.children[3]);
+
+	var first = document.getElementById('to-be-removed');
+	var first_parent = first.parentElement;
+	first_parent.removeChild(first);
+
+	var parent = document.getElementById('parent');
+	parent.removeChild(parent.children[0]);
+	parent.removeChild(parent.children[1]); //浏览器报错
+	//parent.children[1]不是一个有效的节点。原因就在于，当<p>First</p>节点被删除后，parent.children的节点数量已经从2变为了1，索引[1]已经不存在了。
+	
+	
+	//因此，删除多个节点时，要注意children属性时刻都在变化。
+</script>
+</html>

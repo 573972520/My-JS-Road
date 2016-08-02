@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>更新DOM</title>
+</head>
+<body>
+	<p id='p-id-innerHTML'>1</p>
+	<p id="p-id-innerText">2</p>
+	<p id="p-id-innerContent">3</p>
+	<div id="test-div">
+	  <p id="test-js">javascript</p>
+	  <p>Java</p>
+	</div>
+</body>
+	<script type="text/javascript">
+
+		var p = document.getElementById('p-id-innerHTML');
+		p.innerHTML = 'ABC<span style="color:red">Red</span>XYZ';
+
+		var p1 = document.getElementById('p-id-innerText');
+		p1.innerText = 'ABC<span style="color:red">Red</span>XYZ';
+
+		var p2 = document.getElementById('p-id-innerContent');
+		p2.innerContent = "8787";
+
+		// innerText不返回隐藏元素的文本，而textContent返回所有文本。另外注意IE<9不支持textContent。
+		 
+		var js = document.getElementById('test-js');
+		js.innerHTML = "JavaScript";
+		js.style.color = "#ff0000";
+		js.style.fontWeight = 'bold';
+	</script>
+</html>

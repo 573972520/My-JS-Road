@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>插入DOM</title>
+</head>
+<body>
+	<ol id="test-list">
+	    <li class="lang">Scheme</li>
+	    <li class="lang">JavaScript</li>
+	    <li class="lang">Python</li>
+	    <li class="lang">Ruby</li>
+	    <li class="lang">Haskell</li>
+	</ol>
+</body>
+	<script type="text/javascript">
+		var oL = document.getElementById('test-list');
+		var lI = document.getElementsByClassName('lang');
+		var h = lI[4];
+		var j = lI[1];
+		var p = lI[2];
+		var r = lI[3];
+		var s = lI[0];
+		// oL.appendChild(h); //前面是父元素，后面是需要插入的节点
+		// oL.appendChild(j);
+		// oL.appendChild(p);
+		// oL.appendChild(r);
+		// oL.appendChild(s);
+
+		oL.insertBefore(h, s); //第一次参数被插入到前面，第二个参数在第一次参数的后面
+		oL.insertBefore(j, s);
+		oL.insertBefore(p, s);
+		oL.insertBefore(r, s);
+
+
+		//从零创建一个新的节点
+		var div_test = document.createElement('div');
+		div_test.id = 'test';
+		div_test.innerText = '';
+		var p = document.createElement('p');
+		p.class = 'test-p';
+		p.innerHTML = '<span>Test</span>';
+		document.body.appendChild(div_test); //先将新创建的div插入body中
+		div_test.appendChild(p);//在将p插入到div中
+
+
+	</script>
+</html>
