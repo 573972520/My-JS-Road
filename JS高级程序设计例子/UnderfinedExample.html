@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Undefined</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var msg;
+		alert(msg === undefined); //true
+		/*
+		在使用var声明变量但未对其加以初始化的时候，这个变量的值就是undefined
+		 */
+
+		var msgg = undefined;
+		alert(msgg === undefined); //true
+		/*
+		这里会有警告，是因为使用undefined值显式初始化了变量msgg，但是这是没有必要的操作，因为未经初始化的值默认就是undefined
+		 */
+		
+
+		/*-- 包含undefined值的变量与尚未定义的变量的不同之处 --*/
+		var message ; //默认取得undefined值
+		//下面这个变量未声明
+		//var age 
+		alert(message); //undefined
+		alert(age);     //报错
+
+		//对未初始化和未声明的变量执行typeof操作符都返回了undefined值
+		alert(typeof(message));//undefined
+		alert(typeof(age));    //undefined
+	</script>
+</body>
+</html>

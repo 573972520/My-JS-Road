@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>BooleanExample</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//为变量赋`Boolean`类型值的例子：
+		    var found = true;
+		    var lost = false;
+		//将一个值转换成对应的boolean值，可以调用转型函数Boolean(),例子
+		    var msg = "HEllO";
+		    var msgAsBoolean = Boolean(msg);
+		//JS中会把 null undefined 0 NaN 和空字符串'' 视为false，其他的数据类型一律为true
+			var s = '123';
+			if (s) {
+				alert("True");
+			}
+	</script>
+</body>
+</html>

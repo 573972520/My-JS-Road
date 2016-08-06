@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>NumberExample</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//十进制数：
+		    var intNum = 55;
+		// 八进制数:第一位必须是零，然后是八进制数字序列（0 ~ 7）
+		    var octalNum = 070; //八进制的56`
+		    var octalNum1 = 079; //无效的八进制数组--解析为79
+		    var octalNum2 = 08 ;//无效的八进制数组--解析为8
+		//十六进制数：前面两位必须是0x，后面跟十六进制数字（0 ~ 9及A ~ F）
+		    var hexNum = 0xA;//十六进制的10
+		    var hexNum1 = 0x1f;  //十六进制的31
+		//浮点数
+			var floatNum = 1.1; //1.1
+			var floatNum1 = 10.0; //解析为整数  --- 10
+			var floatNum2 = 3.125e7; //31250000\
+		//数值范围--isFinite()函数会在参数位于最小与最大值之间返回true
+			var result = parseFloat.MAX_VALUE + parseFloat.MAX_VALUE;
+			// alert(isFinite(result));  //false
+		//NaN
+			// alert(NaN == NaN); //false
+			// alert(NaN === NaN); //false
+			// alert(isNaN(NaN)); //true
+			// alert(isNaN(10));  //false (10为整数)
+			// alert(isNaN("10"));//false （可以转换成数值10）
+			// alert(isNaN("blue"));//true （不能转换成数值）
+			// alert(isNaN(true));//false   （可以转换成数值1）
+			
+		
+			
+			//Number()函数的转换规则：
+
+			    var num1 = Number(true); //1
+			    var num2 = Number(false);  //0
+			    var num3 = Number(5);  //5
+			    var num4 = Number(004);//4
+			    var num5 = Number(1.1);//1.1
+			    var num6 = Number(null);//0
+			    var num7 = Number(undefined); //NaN
+			    var num8 = Number("");//0
+			    var num9 = Number("Hello Wow");//NaN
+			    var num10 = Number("015.5");//15 .5（前导的零会被忽略）
+
+			//由于Number()函数在转换字符串的时候比较复杂并且不合理，故在处理整数的时候更常用的是parseInt()函数。
+
+			//parseInt()函数的转换规则：
+
+			    var num0 = parseInt("abc12");//NaN
+			    var num1 = parseInt("");//NaN
+			    var num2 = parseInt("123blue");//123
+			    var num3 = parseInt("0xA");  //10
+			    var num4 = parseInt("0xf"); //15
+			    var num5 = parseInt(22.5);//22
+			    var num6 = parseInt(-10); //-10
+			    var num7 = parseInt("-10"); //-10
+			    var num8 = parseInt("015.5");//15
+			    
+			    //对于下面的例子会存在一些问题
+			    var num9 = parseInt("070");//70
+			    var num10 = parseInt("70");//70
+			    
+			    //为了消除上述疑惑，parseInt()函数提供第二个参数：转换时使用的基数（即多少进制）
+			    
+			    var num9fix = parseInt("070", 8);//56
+			    var num10fix = parseInt("070", 10);//70
+			    //指定基数会影响到转换的输出结果
+			    var num11 = parseInt("10", 2);//2
+			    var num12 = parseInt("10", 8);//8
+			    var num13 = parseInt("10", 10);//10
+			    var num14 = parseInt("10", 16);//16
+
+			//parseFloat()函数的转换规则：
+
+			    var num0 = parseFloat("abc12");//NaN
+			    var num1 = parseFloat("");//NaN
+			    var num2 = parseFloat("123blue");//123
+			    var num3 = parseFloat("0xA");  //0
+			    var num4 = parseFloat("0xf"); //0
+			    var num5 = parseFloat(22.5);//22.5
+			    var num6 = parseFloat(-10); //-10
+			    var num7 = parseFloat("-10"); //-10
+			    var num8 = parseFloat("015.5");//15.5
+			    var num9 = parseFloat("22.35.5");//22.35
+			    var num10 = parseFloat("3.125e7");//31250000
+
+			//parseFloat()函数只能解析十进制数，因此它没有第二个参数来指定基数
+
+
+	</script>
+</body>
+</html>
