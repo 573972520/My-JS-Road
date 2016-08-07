@@ -10,13 +10,22 @@
 		var ageAsString = age.toString(); //字符串"11"
 		var found = true;
 		var foundAsString = found.toString();//字符串"true"
-
-		var num = 10;
-		alert(num.toString());  //"10"
-		alert(num.toString(10));//"10"
-		alert(num.toString(2));//"1010"
-		alert(num.toString(8));//"12"
-		alert(num.toString(16));//"a"
+		//toString()方法
+		// var num = 10;
+		// alert(num.toString());  //"10"
+		// alert(num.toString(10));//"10"
+		// alert(num.toString(2));//"1010"
+		// alert(num.toString(8));//"12"
+		// alert(num.toString(16));//"a"
+		//String()方法
+		var value1 = 10;
+		var value2 = true;
+		var value3 = null;
+		var value4;
+		alert(String(value1));  //10
+		alert(String(value2));  //true
+		alert(String(value3));  //null
+		alert(String(value4));  //undefined
 	</script>
 </body>
 </html>

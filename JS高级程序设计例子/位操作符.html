@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>BitwiseNotExample</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//按位非
+		// var num = -18;
+		// alert(num.toString(2)); //"-10010"
+		
+		// var num1 = 25; //二进制00000000000000000000000000011001（32位）
+		// var num2 = ~num1;//11111111111111111111111111100110
+		// alert(num2); //-26
+
+		// var num1 = 25;
+		// var num2 = -num1 - 1;
+		// alert(num2);//-26
+		//按位与
+		var result = 25 & 3;
+		alert(result); //1
+		//我们也可以用一个数和1进行按位&操作来判断奇数与偶数，而且速度更快：
+		function assert (n) {
+			if (n & 1) {
+			 		console.log( n + "是奇数");
+			 	}else {
+			 		console.log(n + "是偶数");
+			 	}
+		}	
+		assert(3);	 //3是奇数	
+		//按位或
+		var result = 25 | 3;
+		alert(result); //27
+		//按位异或
+		var result = 25 ^ 3;
+		alert(result); //26
+		//左移
+		var oldValue = 2; //2的二进制为10
+		var newValue = oldValue << 5; //将10左移5位，变成1000000，等于 十进制的64
+		//如果要求2的n次方，可以这样：
+		function power (n) {
+			 return 1 << n; 
+		}
+		power(5); //32
+
+		//有符号的右移
+		var oldValue = 64; //64的二进制为1000000
+		var newValue = oldValue >> 5; //将1000000右移5位，变成10，等于十进制的2
+
+		//无符号的右移--对于正数
+		var oldValue = 64; //64的二进制为1000000
+		var newValue = oldValue >>> 5; //2
+		//无符号的右移--对于负数
+		var oldValue = -64; //等于十进制的11111111111111111111111111000000
+		var newValue = oldValue >> 5; //等于十进制的134217726
+		//利用无符号右移来判断一个数的正负：
+		function isPos (n) {
+		 return (n == (n >>> 0)) ? true : false; 
+		}
+		isPos(-1);//false
+		isPos(1);//true
+	</script>
+</body>
+</html>

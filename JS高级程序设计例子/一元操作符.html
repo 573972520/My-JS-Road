@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>IncrementDecrementExample</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//前置递增
+		// var age = 29;
+		// ++age;
+		// console.log(age);  //30
+		// //前置递减
+		// var test = 29;
+		// --test;
+		// console.log(test); //28
+		// //副效应--变量的值在语句求值前改变
+		// var age = 29;
+		// var anotherAge = --age + 2; //这里的age的值为28
+		// alert(age);  //28
+		// alert(anotherAge); //30
+
+		// var num1 = 2;
+		// var num2 = 20;
+		// var num3 = --num1 + num2; //结果为21（这里的num1为1）
+		// var num4 = num1 + num2;   //结果为21（这里的num1为1）
+		// //解析：因为num1会先减去1在进行下一步的运算
+
+
+		// //后置递增
+		// var age = 29;
+		// age++;
+		// console.log(age);  //30
+		// //后置递减
+		// var test = 29;
+		// test--;
+		// console.log(test); //28
+		// //副效应--变量的值在语句求值后改变
+		// var age = 29;
+		// var anotherAge = age-- + 2; //这里的age的值为29
+		// alert(age);  //28
+		// alert(anotherAge); //31
+
+		// var num1 = 2;
+		// var num2 = 20;
+		// var num3 = num1-- + num2; //结果为22（这里的num1为2）
+		// var num4 = num1 + num2;   //结果为21（这里的num1为1）
+
+
+		//对于其他数据类型的操作
+		var s1 = "2";
+		var s2 = "z";
+		var b = true;
+		var f = 1.1;
+		var o = {
+			valueOf: function () {
+				 return -1; 
+			}
+		};
+		s1++;//与++s1结果相同
+		s2++;//与++s2结果相同
+		b++;//与++b结果相同
+		f--;//与--f结果相同
+		o--;//与--o结果相同
+		console.log(s1++); //3
+		console.log(s2++); //NaN
+		console.log(b++);  //2
+		console.log(f--);  //0.10000000000000009
+		console.log(o--);  //-2
+	</script>
+</body>
+</html>
