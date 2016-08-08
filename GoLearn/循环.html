@@ -4,29 +4,29 @@
 		<meta charset="UTF-8">
 		<title>循环要点</title>
 		<script type="text/javascript">
-			'use strict'  //为了避免不用var申明的变量会被视为全局变量这一缺陷，所有的JavaScript代码都应该使用strict模式。
+			'use strict;';  //为了避免不用var申明的变量会被视为全局变量这一缺陷，所有的JavaScript代码都应该使用strict模式。
 			/*----------------------------*/
 			/*for循环最常用的地方是利用索引来遍历数组*/
 			/*---------------------------*/
-//			var arr = ['Apple','Google','Microsoft'];
-//			var i , x;
-//			for (i=0;i<arr.length;i++) {
-//				x = arr[i];
-//				alert(x);
-//			}
+			var arr = ['Apple','Google','Microsoft'];
+			var i , x;
+			for (i=0;i<arr.length;i++) {
+				x = arr[i];
+				alert(x);
+			}
 			/*----------------------------*/
 			/*for...in可以把一个对象的所有属性依次循环出来*/
 			/*---------------------------*/
-//			var chencan = {
-//				name:'陈灿',
-//				age:20,
-//				city:'YongKang'
-//			};
-//			for (var key in chencan) {                //如果不要过滤掉对象继承的属性，则删除下面的if语句
-//				if (chencan.hasOwnProperty(key)){  //要过滤掉对象继承的属性，用hasOwnProperty()来实现
-//					alert(key); //'name'  'age'  'city'
-//				}
-//			}
+			var chencan = {
+				name:'陈灿',
+				age:20,
+				city:'YongKang'
+			};
+			for (var key in chencan) {                //如果不要过滤掉对象继承的属性，则删除下面的if语句
+				if (chencan.hasOwnProperty(key)){  //要过滤掉对象继承的属性，用hasOwnProperty()来实现
+					alert(key); //'name'  'age'  'city'
+				}
+			}
 
 			/*-----------------------------------------------------------------------------*/
 			/*由于Array也是对象，而它的每个元素的索引被视为对象的属性，因此，for ... in循环可以直接循环出Array的索引*/
@@ -45,3 +45,5 @@
 	<body>
 	</body>
 </html>
+
+

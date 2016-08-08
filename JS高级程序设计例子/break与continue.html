@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>break与continue</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//continue
+		var num = 0;
+		for (var i = 1; i < 10; i++) {
+			if (i % 5 == 0) {
+				continue;
+			}
+			num++; 
+		}
+		alert(num);  //8
+		//break
+		var num = 0;
+		for (var i = 1; i < 10; i++) {
+			if (i % 5 == 0) {
+				break;
+			}
+			num++; 
+		}
+		alert(num);  //4
+
+		//break与lable
+		var num = 0;
+		outermost:
+		for (var i = 0; i < 10; i++) {
+			for(var j = 0; j < 10; j ++){
+				if (i ==5 && j ==5) {
+					break outermost;
+				}
+				num++;
+			}
+		}
+		alert(num); //55
+
+		//continue与lable
+		var num = 0;
+		outermost:
+		for (var i = 0; i < 10; i++) {
+			for(var j = 0; j < 10; j ++){
+				if (i ==5 && j ==5) {
+					continue outermost;
+				}
+				num++;
+			}
+		}
+		alert(num); //95
+	</script>
+</body>
+</html>

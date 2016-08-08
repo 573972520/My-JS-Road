@@ -4,21 +4,21 @@
 		<meta charset="UTF-8">
 		<title>条件判断语句要点</title>
 		<script type="text/javascript">
-		'use strict'  //为了避免不用var申明的变量会被视为全局变量这一缺陷，所有的JavaScript代码都应该使用strict模式。
-//			var height = parseFloat(prompt('请输入你的身高(m):'));
-//			var weight = parseFloat(prompt('请输入你的体重(kg):')) 
-//			var BMI = weight/height^2;
-//			if (BMI < 18.5) {
-//				alert('过轻');
-//			} else if (BMI >=18.5 && BMI <25){
-//				alert('正常');
-//			} else if (BMI >=25 && BMI <28){
-//				alert('过重');
-//			} else if (BMI >=28 && BMI <32){
-//				alert('肥胖');
-//			} else {
-//				alert('严重肥胖');
-//			}
+		'use strict;' ; //为了避免不用var申明的变量会被视为全局变量这一缺陷，所有的JavaScript代码都应该使用strict模式。
+			var height = parseFloat(prompt('请输入你的身高(m):'));
+			var weight = parseFloat(prompt('请输入你的体重(kg):'));
+			var BMI = weight/height^2;
+			if (BMI < 18.5) {
+				alert('过轻');
+			} else if (BMI >=18.5 && BMI <25){
+				alert('正常');
+			} else if (BMI >=25 && BMI <28){
+				alert('过重');
+			} else if (BMI >=28 && BMI <32){
+				alert('肥胖');
+			} else {
+				alert('严重肥胖');
+			}
 			
 			/*------------------------------------*/
 			/*如果if的条件判断语句结果不是true或false怎么办？*/
