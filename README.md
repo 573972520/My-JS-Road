@@ -451,6 +451,10 @@ console.log(b++);  //2
 console.log(f--);  //0.10000000000000009
 console.log(o--);  //-2
 ```
+
+------------
+
+
 **位操作符**
 对于有符号的整数，32为中的前31为用于表示整数的值，**第32位用于表示数值的符号：0表示正数，1表示负数。**
 ```javascript
@@ -489,13 +493,13 @@ alert(result); //1
 我们也可以用一个数和1进行按位&操作来判断奇数与偶数，而且速度更快：
 ```javascript
 function assert (n) {
-	if (n & 1) {
-	 		console.log( n + "是奇数");
-	 	}else {
-	 		console.log(n + "是偶数");
-	 	}
-}	
-assert(3);	 //3是奇数
+    if (n & 1) {
+             console.log( n + "是奇数");
+         }else {
+             console.log(n + "是偶数");
+         }
+}    
+assert(3);     //3是奇数
 ```
 解析：**奇数的二进制码的最后一位数肯定是1**，和1进行按位&操作之后，结果肯定只有最后一位数为1。而**偶数的二进制表示的最后一位数是0**，和1进行按位&操作，结果所有位数都为0。
 （3）按位或（OR）
@@ -520,12 +524,14 @@ alert(result); //27
 | 1  |  0 | 1  |
 | 0  |  1  | 1 |
 | 0  |  0 |  0 |
+
 ```javascript
 var result = 25 ^ 3;
 alert(result); //26
 ```
 （5）左移
 左移操作符由两个小于号（<<）表示，会将数值的所有位向左移动指定的位数。
+
 ```javascript
 var oldValue = 2; //2的二进制为10
 var newValue = oldValue << 5; //将10左移5位，变成1000000，等于十进制的64
@@ -533,21 +539,25 @@ var newValue = oldValue << 5; //将10左移5位，变成1000000，等于十进�
 注意：左移不会影响操作数的符号位，如果将-2向左移动5位，结果为-64。
 
 如果要求2的n次方，可以这样：
+
 ```javascript
 function power (n) {
-	 return 1 << n; 
+     return 1 << n; 
 }
 power(5); //32
 ```
 （6）有符号的右移
 用（>>）表示，会将数值的所有位向右移动指定的位数。但是保留符号位
+
 ```javascript
 var oldValue = 64; //64的二进制为1000000
 var newValue = oldValue >> 5; //将1000000右移5位，变成10，等于十进制的2
 ```
 **注意：有符号左移与右移不会影响符号位。**
 （7）无符号的右移
+
 用（>>>）表示，正数的无符号右移与有符号右移结果是一样的。负数的无符号右移会把**符号位**也一起移动，而且无符号右移会把负数的二进制码当成正数的二进制码：
+
 ```javascript
 //无符号的右移--对于正数
 var oldValue = 64; //64的二进制为1000000
@@ -557,6 +567,7 @@ var oldValue = -64; //等于十进制的11111111111111111111111111000000
 var newValue = oldValue >> 5; //等于十进制的134217726
 ```
 所以，我们可以利用无符号右移来判断一个数的正负：
+
 ```javascript
 function isPos (n) {
  return (n == (n >>> 0)) ? true : false; 
@@ -564,9 +575,14 @@ function isPos (n) {
 isPos(-1);//false
 isPos(1);//true
 ```
+
+------------
+
+
 **布尔操作符**
 （1）逻辑非
 接受任何数据类型，会返回一个布尔值，该操作符会将它的操作数转换为一个布尔值，然后求其反值。
+
 ```javascript
 alert(!{}); //false
 alert(!Infinity);//false
@@ -579,7 +595,8 @@ alert(!NaN);//true
 alert(!"");//true
 alert(!123456);//false
 ```
-当然，如果你为操作数再加一个！，那么最终结果与对这个值使用Boolean()函数相同，如：
+当然，如果你为操作数再加一个！，那么最终结果与对这个值使用`Boolean()`函数相同，如：
+
 ```javascript
 alert(!!null);//false
 alert(!!undefined);//false
@@ -597,3 +614,420 @@ alert(!!"");//false
 | true  |  false | false  |
 | false  |  true  | false |
 | false  |  false |  false |
+
+逻辑与操作可以应用于任何数据类型，在有一个操作数不是布尔值的情况下，逻辑与操作就不一定返回布尔值，它有如下规则：
+- 如果第一个操作数是对象，则返回第二个操作数。
+- 如果两个操作数都是对象，则返回第二个操作数。
+- 如果第二个操作数是对象，则只有在第一次操作数的求值结果为true的时候才返回该对象。
+- 如果有一个操作数为`null`、`NaN`或者`undefined`，则返回`null`、`NaN`或者`undefined`。
+
+**逻辑非为短路操作，即如果第一个操作数能够决定结果，便不会对第二个操作数求值**。例子：
+
+```javascript
+//短路操作--例（1）
+var found = true;
+var ans = (found && undefinValue);//这里会发生错误
+alert(ans);//该行便不会执行
+//短路操作--例（2）
+var found = false;
+var ans = (found && undefinValue);//不会发生错误
+alert(ans); //执行该喊，结果为"false"
+```
+解析：
+例子（1）说明:由于变量found的值为true，使用逻辑与操作符会对变量undefinValue求值，但是该变量未定义，故导致不会出现警告框。
+例子（2)说明：由于变量found的值为false，意味着结果必定为false，所以无论变量undefinValue是否定义，都不会对它进行求值了，故会出现警告框 。
+所以,**在使用逻辑与操作的时候始终记住它是一个短路操作符**
+（3）逻辑或
+
+|  第一个操作数 |  第二个操作数 | 结果  |
+| :------------: | :------------: | :------------: |
+| true  |  true |  true |
+| true  |  false | true  |
+| false  |  true  | true |
+| false  |  false |  false |
+逻辑或与逻辑与相似，有下列规则：
+- 如果第一个操作数是对象，则返回第一个操作数。
+- 如果第一个操作数的求值结果为false，则返回第二个操作数。
+- 如果两个操作数都是对象，则返回第一个操作数。
+- 如果有两个操作数为`null`、`NaN`或者`undefined`，则返回`null`、`NaN`或者`undefined`。
+**逻辑或也是短路操作，如果第一个操作数的求值结果为true，就不会对第二个操作数求值了**。
+
+```javascript
+var found = true;
+var result = (found || undefinedValue); //不发生错误
+alert(result); //执行
+
+var found = false;
+var result = (found || undefinedValue); //发生错误
+alert(result); //不执行
+```
+我们可以根据这一特性来避免为变量赋null或者undefined。例如：
+
+`var myObject = preferredObject || backupObject;`
+
+该赋值语句表面：变量myObject将被赋予等号后面两个值中的一个，变量preferredObject中包括优先赋给myObject的值，当preferredObject的值为null或者undefined时，backupObject作为后备值将会赋给myObject。
+
+------------
+
+
+**乘性操作符**
+- 乘法（*）
+- 除法（/）
+- 求模（%）
+
+如果参与上述计算的某个操作数不是数值，则在后台调用`Number()`函数将其转换成数值。
+
+------------
+
+
+**加性操作符**
+（1）加法
+对于不是数值的加法：
+- 如果有两个字符串，则将第二个操作数与第一个操作数拼接起来。
+- 如果只有一个操作数是字符串，则将另外一个操作数转换为字符串，然后拼接。
+- 如果有一个操作数是对象、数值或者布尔值，则调用`toString()`来取得对应的字符串值，对于`undefined`与`null`，则调用`String()`函数取得字符串。
+
+```javascript
+var result = 5 + 5;
+var result1 = 5 + "5";
+alert(result);  //10
+alert(result1); //55
+```
+在执行字符串与数值相加时，需要注意如下情况：
+
+```javascript
+var num1 = 5;
+var num2 = 10;
+var msg = "The sum of 5 and 10 is " + num1 + num2; //相当于字符串的相加
+alert(msg);  //The sum of 5 and 10 is 510
+var msg = "The sum of 5 and 10 is " + (num1 + num2); //用括号括起来，保证其优先性
+alert(msg);  //The sum of 5 and 10 is 15
+```
+
+（2）减法
+对于不是数值的减法：
+- 如果有一个操作数是字符串、布尔值、`undefined`或`null`，则先在后台调用`Number()`函数进行转换，如果转换的结果为NaN,则减法的结果为NaN。
+- 如果有一个操作数为对象，则调用`valueOf()`方法取得表示该对象的值，如果得到`NaN`,则结果为`NaN`，如果对象没有`valueOf()`方法，则调用`toString()`方法取得数值。
+
+```javascript
+var num1 = 5 - true; //4
+var num2 = NaN - 1;  //NaN
+var num3 = 5 - "";  //5
+var num4 = 5 - "2";  //3
+var num5 = 5 - null;  //5
+```
+
+------------
+
+
+**关系操作符**
+- 小于（<)
+- 大于（>）
+- 小于等于（<=）
+- 大于等于（>=）
+
+由于大写字母的字符编码全部小于小写字母的字符编码，所以会有如下现象:
+```javascript
+var result = "Brick" < "alphabet";  //true
+```
+若要真正的按字母顺序比较字符串，必须将其转换成相同的大小写格式，然后再进行比较：
+```javascript
+var ans = "Brick".toLowerCase() < "alphabet".toLowerCase();  //false
+```
+对于字符串的比较：
+
+```javascript
+var result = "23" < "3";//true
+//因为"2"的字符编码是50.而"3"的是51
+var result = "23" < 3;//false
+//此时字符串"23"会转换为数值23
+```
+但是对于一个不能转换成合理数值的字符串来说：
+
+```javascript
+var result = "a" < 3; //false 因为a被转换成NaN
+```
+字母"a"不能转换成合理的数值，故变成NaN，
+任何数与NaN进行比较，结果都是NaN。于是：
+
+```javascript
+var result = NaN < 3; //false
+var result1 = NaN >= 3; //false
+```
+
+------------
+
+
+**相等操作符**
+（1）相等和不相等（== 与 ！=） --- 先转换在比较
+
+|  表达式 | 值  |
+| :------------: | :------------: |
+| null == undefined  | true  |
+| "NaN" == NaN  |  false |
+| 5 == NaN  | false  |
+| NaN == NaN  |  false |
+|  NaN != NaN  | true  |
+| false == 0  | true |
+|  true == 1 |  true |
+|  true == 2 | false  |
+|  undefined == 0 | false  |
+| null == 0  | false  |
+| "5" == 5  | true  |
+
+（2）全等和不全等（=== 与 ！==）--- 仅比较不转换
+
+```javascript
+var result = ("55" == 55);  //true,因为转换后相等
+var result = ("55" === 55);  //false 因为是两个不同的数据类型
+```
+
+```javascript
+var result = (null == undefined); //true
+var result1 = (null === undefined); //false因为是两个不同的数据类型
+```
+
+------------
+
+
+**条件操作符**
+```javascript
+var max = (num1 > num2) ? num1 : num2;
+```
+
+------------
+
+
+
+**逗号操作符**
+```javascript
+var num = (5,6,8,1,0);  //num值为0
+```
+
+------------
+
+
+#### 语句
+
+**if语句**
+例子：
+```javascript
+if (BMI < 18.5) {
+	alert('过轻');
+} else if (BMI >=18.5 && BMI <25){
+	alert('正常');
+} else if (BMI >=25 && BMI <28){
+	alert('过重');
+} else if (BMI >=28 && BMI <32){
+	alert('肥胖');
+} else {
+	alert('严重肥胖');
+}
+```
+
+------------
+
+
+**do-while与while语句**
+`do-while`循环体内的代码至少会被执行一次
+`while`循环体内的代码可能永远不会被执行
+
+------------
+
+
+**for语句**
+`for`循环体内的代码可能不会被执行
+
+```javascript
+var count = 10;
+for (var i = 0; i < count; i++) {
+	alert(i);
+}
+//上述for循环与下面的while循环功能相同
+var count = 10;
+var i = 0;
+while (i < count) {
+	alert(i);
+	i++;
+}
+```
+由于ECMAScript中不存在块级作用域，因此循环内部定义的变量也可以在外部访问到：
+
+```javascript
+var count = 10;
+for (var i = 0; i < count; i++) {
+	alert(i);
+}
+alert(i); //10
+```
+将表达式全部省略，会创建一个无限循环
+```javascript
+for(;;) {  //无限循环
+	doSomething();
+}
+```
+
+------------
+
+
+**for-in语句**
+
+```javascript
+for (var propName in window) {
+	document.write(propName);
+}
+```
+**在使用for-in循环之前，先检测确认该对象的值不是`null`或`undefined`。**
+
+
+------------
+
+**lable语句**
+使用lable语句可以在代码中添加标签，以便将来使用。
+
+```javascript
+start: for (var i = 0; i < count; i++) {
+	alert(i);
+}
+```
+定义好的lable可在将来由break或continue语句调用。加标签的语句一般都要与for语句等循环语句配合使用。
+
+------------
+**break和continue语句**
+`break`：立即退出循环，强制继续执行循环后面的语句。
+
+```javascript
+var num = 0;
+for (var i = 1; i < 10; i++) {
+	if (i % 5 == 0) {
+		break;
+	}
+	num++; 
+}
+alert(num);  //4
+```
+解析：
+当i等于1时，if条件语句不满足，故num变为1，i变为2；
+当i等于2时，if条件语句不满足，故num变为2，i变为3；
+当i等于3时，if条件语句不满足，故num变为3，i变为4；
+当i等于4时，if条件语句不满足，故num变为4，i变为5；
+直到i为5时候（循环总共执行了4次），执行break语句退出for循环。**导致循环再num再次递增之前将推出了**，故出现警告框，num结果为4。
+
+`continue`：立即退出循环，但是退出循环后会从循环的顶部继续执行。
+```javascript
+var num = 0;
+for (var i = 1; i < 10; i++) {
+	if (i % 5 == 0) {
+		continue;
+	}
+	num++; 
+}
+alert(num);  //8
+```
+解析：
+当i等于1时，if条件语句不满足，故num变为1，i变为2；
+当i等于2时，if条件语句不满足，故num变为2，i变为3；
+当i等于3时，if条件语句不满足，故num变为3，i变为4；
+当i等于4时，if条件语句不满足，故num变为4，i变为5；
+直到i为5时候，执行continue语句，使num再次递增前退出，导致**此次的num没有加1；但是不会退出循环**，故循环继续；
+当i等于6时，if条件语句不满足，故num变为5，i变为7；
+当i等于7时，if条件语句不满足，故num变为6，i变为8；
+当i等于8时，if条件语句不满足，故num变为7，i变为9；
+当i等于9时，if条件语句不满足，故num变为8，i变为10；
+当i等于10时，循环结束，出现警告框，输出结果8。
+
+break与lable:
+
+```javascript
+var num = 0;
+outermost:
+for (var i = 0; i < 10; i++) {
+	for(var j = 0; j < 10; j ++){
+		if (i ==5 && j ==5) {
+			break outermost;
+		}
+		num++;
+	}
+}
+alert(num); //55
+```
+如果每个循环（i，j）正常执行直到结束，则num的值为100，但是有了一个break与lable的"捣乱"，**使break不仅退出内部的for语句（即变量为j的），并且也会退出外部的for语句（即变量为i的）**，故当变量i与j为5时，num为55。
+
+continue与lable:
+
+```javascript
+var num = 0;
+outermost:
+for (var i = 0; i < 10; i++) {
+	for(var j = 0; j < 10; j ++){
+		if (i ==5 && j ==5) {
+			continue outermost;
+		}
+		num++;
+	}
+}
+alert(num); //95
+```
+continue语句会强制继续执行循环 --- 退出内部循环（变量为j的），执行外部循环（变量为i的），**这便意味着内部循环少执行了5次**，故num的结果为95。
+
+------------
+
+**switch语句**
+从根本上讲，switch语句是为让开发人员**免于编写**下面的代码：
+
+```javascript
+if (BMI == 18.5) {
+	alert('18.5');
+} else if (BMI == 25){
+	alert('25');
+} else if (BMI == 28){
+	alert('28');
+} else if (BMI == 32){
+	alert('32');
+} else {
+	alert('Other');
+}
+```
+
+而与之等价的switch为：
+```javascript
+switch (i) {
+	case 18.5:
+		alert("18.5");
+		break;
+	case 25:
+		alert("25");
+		break;
+	case 28:
+		alert("28");
+		break;
+	case 32:
+		alert("32");
+		break;
+	default:
+		alert("Other");
+		break;
+}
+```
+
+ECAMScript中switch语句的特点：switch语句中可以使用任何数据类型，每个case的值不一定是常量，也可以是变量，甚至是表达式。
+
+```javascript
+var num = 15;
+switch (true) {
+	case num < 0:
+		alert("less than 0");
+		break;
+	case num >= 0 && num <= 10:
+		alert("between 0 and 10");
+		break;
+	case num > 10 && num <= 20:
+		alert("between 10 and 20");
+		break;
+	default:
+		alert("more than 20");
+		break;
+}
+```
+上述例子中之所以给switch传递true，是因为每个case值都是可以返回一个布尔值的，这样每次case按住顺序进行求值，直到找到"归宿"。
+注意：**switch语句在比较值的时候用的是全等操作符（===）**
