@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>FunctionExample</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// function sayHi (name,msg) {
+		// 	 return;//返回undefined
+		// 	 alert("Hello" + name + "," + msg);//不会调用 
+		// }
+		// function sayYes () {
+		// 	 alert("Yes" + arguments[0] + "," + arguments[1]); 
+		// }
+		// sayYes("Carl","nice");//YesCarl,nice
+
+		// function doAdd () {
+		// 	 if (arguments.length == 1) {  //一个参数
+		// 	  	return (10 + arguments[0]);//记得arguments以数值的形式来调用
+		// 	  }  //11
+		// 	  else if (arguments.length == 2) {//两个参数
+		// 	  	return (arguments[0] + arguments[1]);  //8
+		// 	  } else if (arguments.length == 0) { //零个参数
+		// 	  	alert("fuck");
+		// 	  }
+		// }
+
+		// function doAdd (num1,num2) {
+		// 	 arguments[1] = 3;
+		// 	 alert(arguments[0] + num2); 
+		// }
+		// doAdd(5,100);
+		
+		function addSomething (num) {
+			 return num + 100 ;
+		}
+		function addSomething (num) {
+			 return num + 200; 
+		}
+		var s = addSomething(5);
+		alert(s); //205
+	</script>
+</body>
+</html>

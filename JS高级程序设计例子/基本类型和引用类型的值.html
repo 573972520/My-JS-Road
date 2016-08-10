@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DynamicPropertiesExample</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var name = "carl";
+		name.age = 27;
+		alert(name.age);//undefined
+
+		var person = new Object();
+		person.name = "Carl";
+		alert(person.name); //Carl
+
+		function addTen (num) {
+			 num += 10;
+			 return num; 
+		}
+		var count = 20;
+		var result = addTen(count);
+		alert(count); //20
+		alert(result); //30
+		
+		function setName (obj) {
+			 obj.name = "Carl"; 
+		}
+		var person = new Object();
+		setName(person);
+		alert(person.name);//Carl
+
+		
+		</script>
+</body>
+</html>
