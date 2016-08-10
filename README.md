@@ -813,15 +813,15 @@ var num = (5,6,8,1,0);  //num值为0
 例子：
 ```javascript
 if (BMI < 18.5) {
-	alert('过轻');
+    alert('过轻');
 } else if (BMI >=18.5 && BMI <25){
-	alert('正常');
+    alert('正常');
 } else if (BMI >=25 && BMI <28){
-	alert('过重');
+    alert('过重');
 } else if (BMI >=28 && BMI <32){
-	alert('肥胖');
+    alert('肥胖');
 } else {
-	alert('严重肥胖');
+    alert('严重肥胖');
 }
 ```
 
@@ -841,14 +841,14 @@ if (BMI < 18.5) {
 ```javascript
 var count = 10;
 for (var i = 0; i < count; i++) {
-	alert(i);
+    alert(i);
 }
 //上述for循环与下面的while循环功能相同
 var count = 10;
 var i = 0;
 while (i < count) {
-	alert(i);
-	i++;
+    alert(i);
+    i++;
 }
 ```
 由于ECMAScript中不存在块级作用域，因此循环内部定义的变量也可以在外部访问到：
@@ -856,14 +856,14 @@ while (i < count) {
 ```javascript
 var count = 10;
 for (var i = 0; i < count; i++) {
-	alert(i);
+    alert(i);
 }
 alert(i); //10
 ```
 将表达式全部省略，会创建一个无限循环
 ```javascript
 for(;;) {  //无限循环
-	doSomething();
+    doSomething();
 }
 ```
 
@@ -874,7 +874,7 @@ for(;;) {  //无限循环
 
 ```javascript
 for (var propName in window) {
-	document.write(propName);
+    document.write(propName);
 }
 ```
 **在使用for-in循环之前，先检测确认该对象的值不是`null`或`undefined`。**
@@ -883,14 +883,14 @@ for (var propName in window) {
 ------------
 
 **lable语句**
-使用lable语句可以在代码中添加标签，以便将来使用。
+使用`lable`语句可以在代码中添加标签，以便将来使用。
 
 ```javascript
 start: for (var i = 0; i < count; i++) {
-	alert(i);
+    alert(i);
 }
 ```
-定义好的lable可在将来由break或continue语句调用。加标签的语句一般都要与for语句等循环语句配合使用。
+定义好的`lable`可在将来由`break`或`continue`语句调用。加标签的语句一般都要与`for`语句等循环语句配合使用。
 
 ------------
 **break和continue语句**
@@ -899,10 +899,10 @@ start: for (var i = 0; i < count; i++) {
 ```javascript
 var num = 0;
 for (var i = 1; i < 10; i++) {
-	if (i % 5 == 0) {
-		break;
-	}
-	num++; 
+    if (i % 5 == 0) {
+        break;
+    }
+    num++; 
 }
 alert(num);  //4
 ```
@@ -911,16 +911,16 @@ alert(num);  //4
 当i等于2时，if条件语句不满足，故num变为2，i变为3；
 当i等于3时，if条件语句不满足，故num变为3，i变为4；
 当i等于4时，if条件语句不满足，故num变为4，i变为5；
-直到i为5时候（循环总共执行了4次），执行break语句退出for循环。**导致循环再num再次递增之前将推出了**，故出现警告框，num结果为4。
+直到i为5时候（循环总共执行了4次），执行`break`语句退出`for`循环。**导致循环再num再次递增之前将推出了**，故出现警告框，num结果为4。
 
 `continue`：立即退出循环，但是退出循环后会从循环的顶部继续执行。
 ```javascript
 var num = 0;
 for (var i = 1; i < 10; i++) {
-	if (i % 5 == 0) {
-		continue;
-	}
-	num++; 
+    if (i % 5 == 0) {
+        continue;
+    }
+    num++; 
 }
 alert(num);  //8
 ```
@@ -936,98 +936,176 @@ alert(num);  //8
 当i等于9时，if条件语句不满足，故num变为8，i变为10；
 当i等于10时，循环结束，出现警告框，输出结果8。
 
-break与lable:
+`break`与`lable`:
 
 ```javascript
 var num = 0;
 outermost:
 for (var i = 0; i < 10; i++) {
-	for(var j = 0; j < 10; j ++){
-		if (i ==5 && j ==5) {
-			break outermost;
-		}
-		num++;
-	}
+    for(var j = 0; j < 10; j ++){
+        if (i ==5 && j ==5) {
+            break outermost;
+        }
+        num++;
+    }
 }
 alert(num); //55
 ```
-如果每个循环（i，j）正常执行直到结束，则num的值为100，但是有了一个break与lable的"捣乱"，**使break不仅退出内部的for语句（即变量为j的），并且也会退出外部的for语句（即变量为i的）**，故当变量i与j为5时，num为55。
+如果每个循环（i，j）正常执行直到结束，则num的值为100，但是有了一个`break`与`lable`的"捣乱"，**使break不仅退出内部的for语句（即变量为j的），并且也会退出外部的for语句（即变量为i的）**，故当变量i与j为5时，num为55。
 
-continue与lable:
+`continue`与`lable`:
 
 ```javascript
 var num = 0;
 outermost:
 for (var i = 0; i < 10; i++) {
-	for(var j = 0; j < 10; j ++){
-		if (i ==5 && j ==5) {
-			continue outermost;
-		}
-		num++;
-	}
+    for(var j = 0; j < 10; j ++){
+        if (i ==5 && j ==5) {
+            continue outermost;
+        }
+        num++;
+    }
 }
 alert(num); //95
 ```
-continue语句会强制继续执行循环 --- 退出内部循环（变量为j的），执行外部循环（变量为i的），**这便意味着内部循环少执行了5次**，故num的结果为95。
+`continue`语句会强制继续执行循环 --- 退出内部循环（变量为j的），执行外部循环（变量为i的），**这便意味着内部循环少执行了5次**，故num的结果为95。
 
 ------------
 
 **switch语句**
-从根本上讲，switch语句是为让开发人员**免于编写**下面的代码：
+从根本上讲，`switch`语句是为让开发人员**免于编写**下面的代码：
 
 ```javascript
 if (BMI == 18.5) {
-	alert('18.5');
+    alert('18.5');
 } else if (BMI == 25){
-	alert('25');
+    alert('25');
 } else if (BMI == 28){
-	alert('28');
+    alert('28');
 } else if (BMI == 32){
-	alert('32');
+    alert('32');
 } else {
-	alert('Other');
+    alert('Other');
 }
 ```
 
-而与之等价的switch为：
+而与之等价的`switch`为：
 ```javascript
 switch (i) {
-	case 18.5:
-		alert("18.5");
-		break;
-	case 25:
-		alert("25");
-		break;
-	case 28:
-		alert("28");
-		break;
-	case 32:
-		alert("32");
-		break;
-	default:
-		alert("Other");
-		break;
+    case 18.5:
+        alert("18.5");
+        break;
+    case 25:
+        alert("25");
+        break;
+    case 28:
+        alert("28");
+        break;
+    case 32:
+        alert("32");
+        break;
+    default:
+        alert("Other");
+        break;
 }
 ```
 
-ECAMScript中switch语句的特点：switch语句中可以使用任何数据类型，每个case的值不一定是常量，也可以是变量，甚至是表达式。
+ECAMScript中`switch`语句的特点：`switch`语句中可以使用任何数据类型，每个`case`的值不一定是常量，也可以是变量，甚至是表达式。
 
 ```javascript
 var num = 15;
 switch (true) {
-	case num < 0:
-		alert("less than 0");
-		break;
-	case num >= 0 && num <= 10:
-		alert("between 0 and 10");
-		break;
-	case num > 10 && num <= 20:
-		alert("between 10 and 20");
-		break;
-	default:
-		alert("more than 20");
-		break;
+    case num < 0:
+        alert("less than 0");
+        break;
+    case num >= 0 && num <= 10:
+        alert("between 0 and 10");
+        break;
+    case num > 10 && num <= 20:
+        alert("between 10 and 20");
+        break;
+    default:
+        alert("more than 20");
+        break;
 }
 ```
-上述例子中之所以给switch传递true，是因为每个case值都是可以返回一个布尔值的，这样每次case按住顺序进行求值，直到找到"归宿"。
-注意：**switch语句在比较值的时候用的是全等操作符（===）**
+上述例子中之所以给`switch`传递`true`，是因为每个`case`值都是可以返回一个布尔值的，这样每次`case`按住顺序进行求值，直到找到"归宿"。
+注意：**`switch`语句在比较值的时候用的是全等操作符（===）**
+
+
+#### 函数
+
+**基本知识**
+函数会在执行完`return`语句之后停止并立即退出。，位于`return`语句之后的任何代码对不会执行。
+另外，`return`语句可以不带任何返回值。这种情况下，函数在停止执行后将返回`undefined`值。
+
+```javascript
+function sayHi (name,msg) {
+	 return;//返回undefined
+	 alert("Hello" + name + "," + msg);//不会调用 
+}
+```
+
+**理解参数**
+
+ECMAScript函数不介意传递进来多少参数，也不在乎参数的数据类型是什么。原因是参数的内部是用一个数组来表示的，函数体内可以通过`arguments`对象来访问这个参数数组，从而获取每一个参数。
+
+```javascript
+function sayYes () {
+	 alert("Yes" + arguments[0] + "," + arguments[1]); 
+}
+sayYes("Carl","nice");//YesCarl,nice
+```
+
+让函数接受任意个参数并分别实现功能（这样可以模拟方法的重载）：
+
+```javascript
+function doAdd () {
+	 if (arguments.length == 1) {  //一个参数
+	  	return (10 + arguments[0]);//记得arguments以数值的形式来调用
+	  }  //11
+	  else if (arguments.length == 2) {//两个参数
+	  	return (arguments[0] + arguments[1]);  //8
+	  } else if (arguments.length == 0) { //零个参数
+	  	alert("fuck");
+	  }
+}
+```
+
+**没有重载**
+如果在ECMAScript中定义了两个名字相同的函数，则该名字只属于后定义的函数。
+```javascript
+function addSomething (num) {
+	 return num + 100 ;
+}
+function addSomething (num) {
+	 return num + 200; 
+}
+var s = addSomething(5);
+alert(s); //205
+```
+后定义的函数会覆盖先定义函数。
+
+------------
+
+## 变量作用域和内存问题
+#### 基本类型和引用类型的值
+基本类型值：简单的数据段；
+引用类型值：可能由多个值构成的对象。
+
+**动态的属性**
+对于引用类型的值，我们可以为其添加属性和方法，也可以改变和删除属性和方法：
+
+```javascript
+var person = new Object();
+person.name = "Carl";
+alert(person.name); //Carl
+```
+但是我们不能给基本类型的值添加属性：
+
+```javascript
+var name = "carl";
+name.age = 27;
+alert(name.age);//undefined
+```
+
