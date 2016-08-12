@@ -1109,3 +1109,173 @@ name.age = 27;
 alert(name.age);//undefined
 ```
 
+------------
+
+
+
+**复制变量值**
+- 从一个变量向另外一个变量复制**基本类型**的值
+
+```javascript
+var num1 = 5;
+var num2 = num1;
+```
+num2中的5与num1中的5是**完全独立**的，这两个变量可以参与任何操作而**不会互相影响**
+- 从一个变量向另外一个变量复制**引用类型**的值
+
+```javascript
+var obj1 = new Object();
+var obj2 = obj1;
+obj1.name = "Carl";
+alert(obj2.name); //Carl
+```
+obj1和obj2指向同一个对象，，当obj1添加属性后，可以通过obj2来访问这个属性。
+
+
+------------
+
+
+
+**参数的传递**（比较难理解）
+**参数也可以分为：基本类型值和引用类型值**，下面我们对这两类不同的参数的传递进行分析：但是记住：
+> ECMAScript中的所有函数的参数都是按值传递的
+
+函数外部的值赋值给函数内部的参数，与一个变量复制到另一个变量一样。
+**基本类型值的传递和基本类型的复制一样，引用类型的传递和引用类型的复制一样。（参考上一节---复制变量值）**
+- 向参数**传递基本类型**的值时，被传递的值会被复制给一个局部变量（即命名参数）。这个局部变量的变化会反映在函数的外部。
+
+```javascript
+function addTen (num) { //num相当于上述理论所说的"局部变量"
+     num += 10;
+     return num; 
+}
+var count = 20;   //相当于上述理论所说的"被传递的值"
+var result = addTen(count);
+alert(count); //20 没有变化
+alert(result); //30
+```
+解析：虽然值为20的count被复制给了参数num，但是参数num与变量count互不认识完全独立，他们仅仅只是具有相同的值，不会相互影响。
+但是如果num是按引用传递的话，那么变量count的值也会变成30，从而反映函数内部的修改，请看下面的代码：
+- **按引用类型传递**的变量：
+```javascript
+function setName (obj) {
+     obj.name = "Carl"; 
+}
+var person = new Object();
+setName(person);
+alert(person.name);//Carl
+```
+解析：obj与person引用的是同一个对象。
+为了证明**对象的传递是按值传递的**，看下面的例子：
+```javascript
+function setName (obj) {
+     obj.name = "Carl"; 
+     obj = new Object();
+     obj.name =  "Gray";
+}
+var person = new Object();
+setName(person);
+alert(person.name);//Carl
+```
+如果对象（在这里是person对象）的传递是按引用传递的，那么person就会自动被修改为Gray；但是事实表明这是错误的，所以**对象的传递是按值传递的**
+
+------------
+
+**检测类型**
+虽然在检测基本数据类型时typeof是非常给力的助手，但是在检测引用类型的值时就显得力不从心了：
+```javascript
+var n = null;
+var o = new Object();
+alert(typeof(n)); //object
+alert(typeof(o)); //object
+```
+为此提供了instanceof操作符，如果变量是给定引用类型的实例，那么instanceof会发挥true：
+```javascript
+var oStringObject = new String("hello world");
+console.log(oStringObject instanceof String);  // 变量 oStringObject 是否为 String 对象的实例，输出 "true"
+```
+
+
+
+#### 本章小结
+
+- **基本类型值**在内存中占据固定大小的空间，因此被保存在栈内存中
+- 从一个变量向另外一个变量复制**基本类型的值**，会创建这个值的一个副本
+- **引用类型值**是对象，保存在堆内存中
+- 包含引用类型值的变量实际上包含的不是对象本身，而是一个指向该对象的指针，所以从一个变量向另外一个变量复制**引用类型的值**，复制的其实是指针，**因此两个变量始终指向同一个对象**
+- 确定一个值是哪种**基本类型**可以使用`typeof`操作符，确定一个值是哪种**引用类型**可以使用`instanceof`操作符
+
+------------
+
+#### 执行环境及作用域
+
+**基本概念**
+**执行环境**定义了变量或函数有权访问的其他数据，决定它们各自的行为，每个执行环境都有一个与之关联的**变量对象**，环境中定义的所有变量和函数都保存在这个对象中。
+**执行环境**的类型有两种---全局与局部（函数）。
+**作用域链**保证对执行环境有权访问的所有变量和函数的有序访问。
+
+```javascript
+var color = blue;
+
+function changeColor () {
+     var anotherColor = "red";
+
+     function swapColor () {
+           var tempColor = anotherColor;
+           anotherColor = color;
+           color = tempColor; 
+
+           //这里可以访问color、anotherColor和tempColor
+      } 
+
+      //这里可以访问color和anotherColor，但是不能访问tempColor
+}
+//这里只能访问color
+changeColor();
+```
+以上代码共涉及3个执行环境：全局环境、changeColor()的局部环境和swapColor()的局部环境。
+
+**没有块级作用域**
+if语句中的变量声明会将变量添加到当前的执行环境中。
+
+```javascript
+if (true) {
+    var color = "blue";
+}
+
+alert(color); //blue
+```
+for语句创建的变量即使在for循环执行结束之后，也会存在于循环外部的执行环境中。
+
+```javascript
+for(var i=0; i < 10; i++){
+    var j = 0;
+    j = j++;
+}
+
+alert(i);//10
+```
+
+
+#### 本章小结
+
+- **执行环境**有全局执行环境与函数执行环境之分。
+- 每次进入一个新的执行环境，都会创建一个用于搜索变量和函数的**作用域链**。
+- 函数的**局部环境**不仅有权访问函数作用域中的变量，还可访问**父环境乃至全局环境**；而全局环境**只能**访问全局环境中定义的变量与函数。
+
+
+------------
+
+## 引用类型
+#### 基本概念
+对象是某个特定引用类型的实例。
+新对象是使用new操作符后跟一个构造函数来创建的。
+构造函数本身就是一个函数，只不过它出于创建新对象的目的而定义
+`var person = new Object();`
+
+------------
+
+#### Object类型
+
+
+
