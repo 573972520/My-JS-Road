@@ -1277,5 +1277,169 @@ alert(i);//10
 
 #### Object类型
 
+创建Object实例的两种方法：
+- 使用new操作符后面跟Object构造函数
+  - `var person = new Object();`
+- 对象字面量表示法
+```javascript
+var person = {
+    name : "Carl",
+    age : 29,
+    5 : true,
+    "sex" : man  //属性名也可以使用字符串
+};
+```
+
+
+访问对象属性的方法有两种：
+1. 点表示法
+ `alert(person.name);  //"Carl"`
+2. 方括号法--主要优点是可以通过变量来访问属性 
+```javascript
+var propertyName = "name";
+alert(person[propertyName]); //"Carl"
+```
+如果属性名中有导致错误的字符或者使用关键字或保留字，也可以使用该方法：
+`person["first name"] = "Carl";`
+    
+#### Array类型
+创建数组的基本方法有两种：
+（1）利用Array构造函数：
+
+```javascript
+var colors = new Array();//利用构造函数创建数组
+//可以向构造函数传递数组数量
+var colors = new Array(20); 
+//可以向构造函数传递数组中包含的项
+var colors = new Array("red", "white");
+//也可以省掉new操作符
+var coloer = Array(3);  //创建一个包含3项的数组
+var names = Array("gray"); //创建一个包含1项的数组
+```
+（2）数组字面量表示法
+```javascript
+var color = ["red", "blue"];
+var name = []; //创建一个空数组
+var value = [1,2,]; //不要这样创建！这样会创建一个包含2或3项的数组
+var options = [,,,,,]; //不要这样！会创建一个包含5或者6项的值为undefined的数组
+```
+
+读取和设置数组的值:
+```javascript
+var color = ["red", "white", "green"];
+alert(color[0]);  //显示第一项
+color[2] = "black"; //修改第三项
+color[3] = "yellow";//新增第四项
+```
+
+数组的length属性：
+```javascript
+var color = ["red", "white", "green"];
+color.length = 2;
+alert(color[2]);  //undefined
+```
+解析：需要注意长度的变化给数组带来的影响
+
+利用length属性在数组末尾添加新项：
+```javascript
+var color = ["red", "white", "green"];
+color[color.length] = "balck"; //在位置3添加新颜色
+color[color.length] = "yellow"; //在位置4添加新颜色
+```
+
+------------
+
+**检测数组**
+
+```javascript
+//确定某个对象是不是数组
+if (value instanceof Array) {
+    //do something
+}
+//确定某个值是不是数组，而不管她在哪个全局执行环境中创建
+if (Array.isArray(value)) {
+    // do something
+}
+```
+
+**转换方法**
+数组继承toLocaleString()、toString()和valueOf()方法，在默认情况下用以逗号隔开的字符串的形式返回数组项。
+join()方法可以使用不同的分隔符来构建这个字符串。join()方法只接受一个参数，如果不给join()方法传人参数，或者传人的参数为undefined，则使用逗号作为分隔符。
+
+```javascript
+var color = ["red", "white", "green"];
+alert(color.join());  //省掉参数用逗号
+alert(color.join("||"));
+alert(color.join(undefined));//用逗号
+```
+**栈方法**
+`push()`向Array的末尾添加若干元素
+`pop()`则把Array的最后一个元素删除掉,减少数组的length
+
+```javascript
+var arr = [1,3];
+alert(arr.push('A','b')); //输出的是数组的长度--4
+var pop = arr.pop();  //会将'b'元素赋值给pop
+alert(pop); //显示b
+alert(arr.length); //输出的是数组的长度--3
+```
+**队列方法**
+`unshift()`向Array的头部添加若干元素并返回数组的长度
+`shift()`则把Array的第一个元素删除掉并返回该元素，同时使数组长度减1
+
+```javascript
+var arr = [1,2,3,4];
+alert(arr.unshift('A','b'));//6
+var shift = arr.shift();
+alert(shift);//A
+alert(arr.length);//5
+```
+**重排序方法**
+`reverse()`把整个Array的元素给掉个个，也就是反转
+```javascript
+var arr = [1,2,3,4];
+arr.reverse();
+alert(arr); //4,3,2,1
+```
+`sort()`方法用于对数组的元素进行排序
+
+```javascript
+//升序排列
+function compare(x,y) {
+    if (x > y) {return 1;}
+    if (x < y) {return -1;}
+    return 0;
+}
+//降序排列
+function compareS(x,y) {
+    if (x > y) {return -1;}
+    if (x < y) {return 1;}
+    return 0;
+}
+var value = [0,1,5,10,15];
+value.sort(compare);
+alert(value); //0,1,5,10,15
+value.sort(compareS);
+alert(value);//15,10,5,1,0
+```
+
+**操作方法**
+`concat()`方法会先创建当前数组的一个副本，再将接受到的参数添加到这个副本的末尾，最后返回新构建的数组。
+```javascript
+var arr = [1,2,3,4];
+var addArr = arr.concat([5,6,7,['a','b']]);//实际上，concat()方法可以接收任意个元素和Array，并且自动把Array拆开，然后全部添加到新的Array里：
+alert(addArr);//1,2,3,4,5,6,7,a,b
+alert(arr);//1,2,3,4
+//请注意，concat()方法并没有修改当前Array，而是返回了一个新的Array。
+```
+slice()
+```javascript
+var arr = [1,2,3,4,5,6,7,8,9];
+var arr2 = arr.slice(3);
+var arr3 = arr.slice(2,5);
+alert(arr2);//4,5,6,7,8,9
+alert(arr3);//3,4,5
+```
+
 
 
