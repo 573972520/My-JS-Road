@@ -1440,6 +1440,135 @@ var arr3 = arr.slice(2,5);
 alert(arr2);//4,5,6,7,8,9
 alert(arr3);//3,4,5
 ```
+`splice()`方法**万能数组方法**。
+**该方法会改变原始数组**。
+splice(index,howmany,item1,.....,itemX)
+index:必需，整数，规定项目的位置。
+howmany:必需，要删除的项目数量，如果为0，则不会删除项目。
+item1,.....,itemX:向数组添加新的项目。
+
+```javascript
+var color = ["red", "green", "blue"];
+
+var removed = color.splice(0,1);  //删除第一项
+alert(color); //green blue
+alert(removed); //red 返回的数组中只包含一项
+
+removed = color.splice(1, 0, "yellow", "orange");//从位置1开始插入两项
+alert(color);  ///green red purple orange blue
+alert(removed);//返回一个空数组
+
+removed = color.splice(1, 1, "red", "purple");//插入两项，删除一项
+alert(color);//green red purple orange blue
+alert(removed);//yellow返回的数组中只包含一项
+```
+
+**位置方法**
+`indexOf()`方法可返回某个指定的字符串值在字符串中首次出现的位置。
+`lastIndexOf()`方法可返回一个指定的字符串值最后出现的位置，在一个字符串中的指定位置从后向前搜索。
+`indexOf()`和`lastIndexOf()`都接受两个参数，要查找的项和（可选的整数参数）规定在字符串中开始检索的位置。
+没有找到的情况下返回-1，查找时使用全等（===）去查找
+
+```javascript
+var number= [1,2,3,4,5,4,3,2,1];
+
+alert(number.indexOf(4));  //3
+alert(number.lastIndexOf(4));//从后向前搜索字符串4最后出现的位置---5
+
+alert(number.indexOf(4,4));//从第四项开始搜索(即从5开始搜索)，找到倒序的4 --- 5
+alert(number.lastIndexOf(4,4));//从第四项开始搜索(即从5开始搜索)，找到倒序的4 --- 3
+```
+
+**迭代方法**
+- `every()`
+- `filter()`
+- `forEach()`
+- `map()`
+- `some()`
+上述方法都不会改变数组中的包含的值。
+`every()`与`some()`，都用于查询数组中的项是否满足某个条件。
+
+```javascript
+var num = [1,2,3,4,5,4,3,2,1];
+//对于every()来说，传入的函数必须每一项都满足才返回true 
+var everyResult = num.every(function (item, index, array) {
+     return (item > 2); 
+});
+alert(everyResult); //false
+//对于some()来说，传入的函数只要满足就返回true 
+var someResult = num.some(function (item, index, array) {
+     return (item > 2); 
+});
+alert(someResult); //true
+```
+`filter()`函数用于把Array的某些元素过滤掉，然后返回剩下的元素
+
+```javascript
+var num = [1,2,3,4,5,4,3,2,1];
+
+var filterResult = num.filter(function (item, index, array) {
+     return (item > 2); 
+});
+alert(filterResult);//[3,4,5,4,3]
+```
+`map()`函数对数组中的每一项运行给定函数，返回调用后的结果组成的数组 
+
+```javascript
+var num = [1,2,3,4,5,4,3,2,1];
+
+var mapResult = num.map(function (item, index, array) {
+     return item * 2; 
+});
+alert(mapResult);//[2,4,6,8,10,8,6,4,2]
+```
+`forEach()`对数组中的每一项运行传入的函数。
+
+```javascript
+var num = [1,2,3,4,5,4,3,2,1];
+
+var forEachResult = num.forEach(function (item, index, array) {
+     //do something
+});
+```
+**缩小方法**
+`reduce()`方法接收4个参数：前一个值、当前值、项的索引和数组 对象，但必须接收两个参数，把结果继续和序列的下一个元素做累积计算，其效果就是：
+` [x1, x2, x3, x4].reduce(f) = f(f(f(x1, x2), x3), x4)`
+
+```javascript
+var value = [1,2,3,4,5];
+var sum = value.reduce(function (prev, cur, index, array) {
+     return prev + cur; 
+});
+alert(sum);//15
+```
+
+`reduceRight()`方法和`reduce()`一样，只是方向相反而已。
+
+```javascript
+var value = [1,2,3,4,5];
+var sum = value.reduceRight(function (prev, cur, index, array) {
+     return prev + cur; 
+});
+alert(sum);//15
+```
+
+#### Date类型
+使用new操作符和Date构造函数可以创建一个对象：
+`var now = new Date();`
+新创建的对象会自动获取当前的日期和时间。
+如果想创建特定的日期和时间，可以使用`Date.parse()`和`Date.UTC()`。
+
+```javascript
+var someDate = new Date(Date.parse("May 25, 2014"));
+console.log(someDate);//Sun May 25 2014 00:00:00 GMT+0800 (中国标准时间)
+
+var newDate = new Date(Date.UTC(2000, 0));
+var allFives = new Date(Date.UTC(2005,4,5,17,55,55));
+console.log(newDate);//Sat Jan 01 2000 08:00:00 GMT+0800 (中国标准时间)
+console.log(allFives);//Fri May 06 2005 01:55:55 GMT+0800 (中国标准时间)
+```
+
+#### RegExp类型
 
 
 

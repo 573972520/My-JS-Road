@@ -6,7 +6,166 @@
 </head>
 <body>
 	<script type="text/javascript">
-		var person = new Object();
+		// var person = new Object();
+
+		// var person = {
+		// 	name : "Carl",
+		// 	age : 29,
+		// 	5 : true,
+		// 	"sex" : man
+		// };
+		// var colors = new Array();//利用构造函数创建数组
+		// //可以向构造函数传递数组数量
+		// var colors = new Array(20); 
+		// //可以向构造函数传递数组中包含的项
+		// var colors = new Array("red", "white");
+		// //也可以省掉new操作符
+		// var coloer = Array(3);  //创建一个包含3项的数组
+		// var names = Array("gray"); //创建一个包含1项的数组
+
+		// var color = ["red", "blue"];
+		// var name = []; //创建一个空数组
+		// var value = [1,2,]; //不要这样创建！这样会创建一个包含2或3项的数组
+		// var options = [,,,,,]; //不要这样！会创建一个包含5或者6项的值为undefined的数组
+
+		// var color = ["red", "white", "green"];
+		// alert(color[0]);  //显示第一项
+		// color[2] = "black"; //修改第三项
+		// color[3] = "yellow";//新增第四项
+
+		// var color = ["red", "white", "green"];
+		// color.length = 4;
+		// alert(color[3]);  //undefined
+
+		// var color = ["red", "white", "green"];
+		// color[color.length] = "balck"; //在位置3添加新颜色
+		// color[color.length] = "yellow"; //在位置4添加新颜色
+		// //确定某个对象是不是数组
+		// if (value instanceof Array) {
+		// 	//do something
+		// }
+		// //确定某个值是不是数组，而不管她在哪个全局执行环境中创建
+		// if (Array.isArray(value)) {
+		// 	// do something
+		// }
+		// var color = ["red", "white", "green"];
+		// alert(color.join());  //省掉参数用逗号
+		// alert(color.join("||"));
+		// alert(color.join(undefined));//用逗号
+
+		// //push()向Array的末尾添加若干元素
+		// //pop()则把Array的最后一个元素删除掉,减少数组的length
+		// var arr = [1,3];
+		// alert(arr.push('A','b')); //输出的是数组的长度--4
+		// var pop = arr.pop();  //会将'b'元素赋值给pop
+		// alert(pop); //显示b
+		// alert(arr.length); //输出的是数组的长度--3
+
+		//unshift()向Array的头部添加若干元素并返回数组的长度
+		//shift()则把Array的第一个元素删除掉并返回该元素，同时使数组长度减1
+		// var arr = [1,2,3,4];
+		// alert(arr.unshift('A','b'));//6
+		// var shift = arr.shift();
+		// alert(shift);//A
+		// alert(arr.length);//5
+		// 升序排列
+		// function compare(x,y) {
+		// 	if (x > y) {return 1;}
+		// 	if (x < y) {return -1;}
+		// 	return 0;
+		// }
+		// //降序排列
+		// function compareS(x,y) {
+		// 	if (x > y) {return -1;}
+		// 	if (x < y) {return 1;}
+		// 	return 0;
+		// }
+		// var value = [0,1,5,10,15];
+		// value.sort(compare);
+		// alert(value); //0,1,5,10,15
+		// value.sort(compareS);
+		// alert(value);//15,10,5,1,0
+		// 
+		//把当前的Array和另一个Array连接起来，并返回一个新的Array
+		// var arr = [1,2,3,4];
+		// var addArr = arr.concat([5,6,7,['a','b']]);//实际上，concat()方法可以接收任意个元素和Array，并且自动把Array拆开，然后全部添加到新的Array里：
+		// alert(addArr);//1,2,3,4,5,6,7,a,b
+		// alert(arr);//1,2,3,4
+		// //请注意，concat()方法并没有修改当前Array，而是返回了一个新的Array。
+
+		// var arr = [1,2,3,4,5,6,7,8,9];
+		// var arr2 = arr.slice(3);
+		// var arr3 = arr.slice(2,5);
+		// alert(arr2);//4,5,6,7,8,9
+		// alert(arr3);//3,4,5
+		
+		// var color = ["red", "green", "blue"];
+		// var removed = color.splice(0,1);  //删除第一项
+		// alert(color); //green blue
+		// alert(removed); //red 返回的数组中只包含一项
+
+		// removed = color.splice(1, 0, "yellow", "orange");//从位置1开始插入两项
+		// alert(color);  ///green red purple orange blue
+		// alert(removed);//返回一个空数组
+
+		// removed = color.splice(1, 1, "red", "purple");//插入两项，删除一项
+		// alert(color);//green red purple orange blue
+		// alert(removed);//yellow返回的数组中只包含一项
+
+		// var number= [1,2,3,4,5,4,3,2,1];
+
+		// alert(number.indexOf(4));  //3
+		// alert(number.lastIndexOf(4));//从后向前搜索字符串4最后出现的位置---5
+
+		// alert(number.indexOf(4,4));//从第四项开始搜索(即从5开始搜索)，找到倒序的4 --- 5
+		// alert(number.lastIndexOf(4,4));//从第四项开始搜索(即从5开始搜索)，找到倒序的4 --- 3
+		// 
+		// var num = [1,2,3,4,5,4,3,2,1];
+		// //对于every()来说，传入的函数必须每一项都满足才返回true 
+		// var everyResult = num.every(function (item, index, array) {
+		// 	 return (item > 2); 
+		// });
+		// alert(everyResult); //false
+		// //对于some()来说，传入的函数只要满足就返回true 
+		// var someResult = num.some(function (item, index, array) {
+		// 	 return (item > 2); 
+		// });
+		// alert(someResult); //true
+		// 
+	 //    var num = [1,2,3,4,5,4,3,2,1];
+
+		// var filterResult = num.filter(function (item, index, array) {
+		// 	 return (item > 2); 
+		// });
+		// alert(filterResult);//[3,4,5,4,3]
+		
+		// var num = [1,2,3,4,5,4,3,2,1];
+
+		// var mapResult = num.map(function (item, index, array) {
+		// 	 return item * 2; 
+		// });
+		// alert(mapResult);//[2,4,6,8,10,8,6,4,2]
+		// 
+		
+		// var num = [1,2,3,4,5,4,3,2,1];
+
+		// var forEachResult = num.forEach(function (item, index, array) {
+		// 	 //do something
+		// });
+
+		// var value = [1,2,3,4,5];
+		// var sum = value.reduce(function (prev, cur, index, array) {
+		// 	 return prev + cur; 
+		// });
+		// alert(sum);//15
+		// 
+		var someDate = new Date(Date.parse("May 25, 2014"));
+		console.log(someDate);//Sun May 25 2014 00:00:00 GMT+0800 (中国标准时间)
+		var newDate = new Date(Date.UTC(2000, 0));
+		var allFives = new Date(Date.UTC(2005,4,5,17,55,55));
+		console.log(newDate);//Sat Jan 01 2000 08:00:00 GMT+0800 (中国标准时间)
+		console.log(allFives);//Fri May 06 2005 01:55:55 GMT+0800 (中国标准时间)
 	</script>
+
 </body>
 </html>
