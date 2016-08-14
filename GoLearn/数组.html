@@ -39,15 +39,15 @@
 			}
 			function push () {
 				//push()向Array的末尾添加若干元素
-				//pop()则把Array的最后一个元素删除掉
+				//pop()则把Array的最后一个元素删除掉,减少数组的length
 				var arr = [1,3];
 				alert(arr.push('A','b')); //输出的是数组的长度--4
 				var pop = arr.pop();  //会将'b'元素赋值给pop
 				alert(pop); //显示b
 			}
 			function unshift () {
-				//unshift()向Array的头部添加若干元素
-				//shift()则把Array的第一个元素删除掉
+				//unshift()向Array的头部添加若干元素并返回数组的长度
+				//shift()则把Array的第一个元素删除掉并返回该元素，同时使数组长度减1
 				var arr = [1,2,3,4];
 				alert(arr.unshift('A','b'));
 				var shift = arr.shift();
