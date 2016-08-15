@@ -1715,6 +1715,57 @@ alert(data[0].age);//28
 ------------
 
 **函数内部属性**
+在函数内部，有两个特殊的对象：`arguments`和`this`。
+（1）`arguments`
+`arguments`有一个叫`callee`的属性，该属性是一个指针，指向拥有这个`arguments`对象的函数
+
+```javascript
+function factorial (num) {
+     if (num <= 1) {
+        return 1;
+      } else {
+        return num * arguments.callee(num-1);
+      }
+}
+
+var trueFactorial = factorial;//将函数赋值给新的变量
+factorial = function () { //再将原来的函数改变
+     return 0; 
+};
+alert(trueFactorial(5));//120
+alert(factorial(5));//0
+```
+解析：上述代码中的`factorial()`函数使用`arguments`的`callee`属性构造了一个递归算法的阶乘函数。并且这个函数无论引用函数时是使用什么名称，都可以保证正常的完成递归调用。
+
+（2）`this`
+
+```javascript
+window.color = "red";
+var o = {
+    color:"blue"
+};
+function sayColor () {
+     alert(this.color); 
+}
+
+sayColor();//red
+o.sayColor = sayColor;
+o.sayColor();//blue
+```
+解析：上述代码中`sayColor()`是在全局作用域中定义的，它引用了`this`对象，因此`this`引用的是全局对象`window`，当将这个函数赋给o并且调用的时候，`this`引用的对象就是o了。
+
+------------
+
+**函数的属性与方法**
+每个函数都包含两个属性：length和prototype
+length属性表示函数希望接收的命名参数的个数。
+```javascript
+function sayName (name) {
+     alert(neme); 
+}
+alert(sayName.length);  //1---函数的参数为1
+```
+每个函数都包含两个非继承的方法：apply()和call()。
 
 
 
