@@ -1569,6 +1569,153 @@ console.log(allFives);//Fri May 06 2005 01:55:55 GMT+0800 (中国标准时间)
 ```
 
 #### RegExp类型
+**创建方法**
+
+(1)字面量形式创建：
+
+```javascript
+var expression = / pattern / flags 
+//其中pattern是正则表达式，flags是标志，用于标明正则表达式的行为
+//例子
+var pattern = /[bs]at/g;
+```
+
+(2)使用RegExp构造函数创建：
+```javascript
+var pattern2 = new RegExp ("[bc]at", "i");
+```
+其中正则表达式支持3个标志：
+- g：表示全局模式
+- i:表示不区分大小写
+- m:表示多行模式
+
+------------
+
+
+**RegExp实例方法**
+（1）`exec()`方法--用于检索字符串中的正则表达式的匹配。
+会返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为 null。
+```javascript
+var text = "mon and dad and baby";
+var pattern = /mon( and dad( and baby)?)?/gi;
+
+var matches = pattern.exec(text);
+console.log(matches.index);//0
+console.log(matches.input);//mon and dad and baby
+console.log(matches[0]);//mon and dad and baby
+console.log(matches[1]);//and dad and baby
+console.log(matches[2]);//and baby"
+```
+（2）`test()`方法用于检测一个字符串是否匹配某个模式。如果字符串 string 中含有与 RegExpObject 匹配的文本，则返回 true，否则返回 false。
+
+```javascript
+var text = "000-00-0000";
+var pattern = /\d{3}-\d{2}-\d{4}/;
+
+if (pattern.test(text)) {
+    alert("matched");
+}
+```
+RegExp实例继承的`toLocalString()`和`toString()`方法都会返回正则表达式的字面量。
+
+------------
+
+
+#### Function类型
+**函数是对象，函数名是指针**
+
+```javascript
+function sum (num1, num2) {
+     return num1 + num2; 
+}
+alert(sum(10,10));//20
+
+var anotherSum = sum;
+alert(anotherSum(10,10));//20
+
+sum = null;
+alert(anotherSum(10,10));//20
+```
+解析：上述代码中声明了`sum()`的函数，又声明了变量`anotherSum`，并将sum的值赋值给`anotherSum`；
+注意：**使用不带圆括号的函数名是访问函数指针，而非调用函数。**
+即使`sum`设置为`null`，让它与函数断绝关系，`anotherSum`也可以正常调用。
+
+------------
+
+**函数声明与函数表达式**
+解析器会率先读取函数声明，并使其在执行任何代码之前可用；
+对于函数表达式，则必须等到解析器执行到其所在的代码位置才进行解析。
+
+```javascript
+alert(sum(10,10));
+function sum (n1,n2) {
+     return n1+n2; 
+}
+```
+解析：以上代码可以运行，是因为解析器会进行一个函数声明提升的行为，使函数放在代码的顶部。所以声明函数即使在调用它的代码之后，javascript引擎也能将其提升于顶部。
+
+```javascript
+alert(sum(10,10));
+var sum = function (n1,n2) {
+     return n1+n2; 
+};
+```
+解析：将函数声明改为等价的函数表达式之后，上述代码不会执行；
+原因是因为函数在于一个初始化语句中，而不是一个函数声明中。
+
+------------
+
+**作为值的函数**
+
+```javascript
+function callSomeFunction (someFunction, someArgument) {
+     return someFunction(someArgument); 
+}
+function add10 (num) {
+     return num + 10; 
+}
+
+var result = callSomeFunction(add10,10);
+alert(result);
+```
+注意：**要访问函数的指针而不是执行函数的话，必须去掉函数名后面的圆括号**，因此上师大例子中传递给`callSomeFunction()`的是`add10`，而不是`add10()`。
+
+另外一个例子：
+```javascript
+function cerateComparisonFunction (propertyName) {
+     return function (obj1, obj2) {
+         var value1 = obj1[propertyName]; //接受到的propertyName参数，会使用方括号表示法来取得给定属性的值
+         var value2 = obj2[propertyName]; //接受到的propertyName参数，会使用方括号表示法来取得给定属性的值
+
+         if (value1 < value2) {
+            return -1;
+          } 
+         else if (value1 > value2) {
+            return 1;
+          }
+          else {
+            return 0;
+          }
+     } ;
+}
+//可以按照对象的属性进行排序
+
+var data = [{name:"Zan", age:28}, {name:"Nis", age:29}];
+
+data.sort(cerateComparisonFunction("name")); //按照对象的name属性进行排序
+alert(data[0].name); //Nis //根据name属性排序后，第一个为Nis
+alert(data[0].age);//29
+
+data.sort(cerateComparisonFunction("age"));//按照对象的age属性进行排序
+alert(data[0].name); //Zan //根据age属性排序后，第一个为Zan
+alert(data[0].age);//28
+```
+
+
+------------
+
+**函数内部属性**
+
 
 
 
