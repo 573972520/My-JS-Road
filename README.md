@@ -1766,6 +1766,92 @@ function sayName (name) {
 alert(sayName.length);  //1---函数的参数为1
 ```
 每个函数都包含两个非继承的方法：apply()和call()。
+（1）apply()接受两个参数：第一个是其中运行函数的作用域，第二个是参数数组，其中，第二个参数可以是Array的实例，也可以是arguments对象。
+
+```javascript
+function sum (num1, num2) {
+	 return num1 + num2; 
+}
+function callSum (num1, num2) {
+	 return sum.apply(this, arguments);//传入arguments对象 
+}
+alert(callSum(10,10));//20
+function callSum1 (num1, num2) {//传入数组
+	 return sum.apply(this, [num1,num2]); 
+}
+alert(callSum1(12,12));//24
+```
+（2）call()参数：第一个参数是this，其余参数是直接传递给函数，也就是说传递给函数的参数必须逐个列举出来。
+
+```javascript
+function sum (num1, num2) {
+	 return num1 + num2; 
+}
+function callSum (num1, num2) {
+	 return sum.call(this,num1, num2); 
+}
+alert(callSum(10,10));//20
+```
+它们两个能够扩充函数赖以运行的作用域：
+```javascript
+window.color = "red";
+var o = {
+	color:"blue"
+};
+function sayColor () {
+	 alert(this.color); 
+}
+sayColor();//red
+
+sayColor.call(this);//red
+sayColor.call(window);//red
+sayColor.call(o);//blue
+```
+bind()方法：会创建一个函数的实例，其this值会被绑定到传给bind()函数的值：
+```javascript
+window.color = "red";
+var o = {
+	color:"blue"
+};
+function sayColor () {
+	 alert(this.color); 
+}
+var objSayColor = sayColor.bind(o);
+objSayColor();//blue
+```
+#### 基本包装类型
+**基本概念**
+当读取一个基本类型值的时候，后台会创建一个对应的**基本包装类型的对象**，从而让我们能够调用一些方法来操作这些数据：
+
+```javascript
+var s1 = "some text";//s1为基本类型，不是对象，因此它不应该有方法
+var s2 = s1.substring(2);//为了实现上述解释中的操作，后台会创建一个String类型的实例从而调用指定的方法。
+```
+**引用类型与基本包装类型的区别在于对象的生存期**
+
+使用new操作符创建的引用类型的实例，对象在执行流离开当前作用域之前都保存在内存中。
+而自动创建的基本包装类型的对象，只存在于一行代码的执行瞬间，然后就立即销毁。
+
+```javascript
+var s1 = "some test";
+s1.color = "red"; //该行创建的String对象在执行下面一行代码时语句被销毁
+alert(s1.color);//该行又自动创建String对象，但是没有了color属性，故显示undefined
+```
+使用new调用的基本包装类型的构造函数与直接调用同名的转型函数是不一样的：
+```javascript
+var value = "25";
+var num = Number(value);//转型函数
+alert(typeof(num)); //number
+
+var obj = new Number(value);//改造函数
+alert(typeof(obj));//object
+```
+
+------------
+
+
+**Boolean类型**
+
 
 
 
