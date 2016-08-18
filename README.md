@@ -1852,6 +1852,63 @@ alert(typeof(obj));//object
 
 **Boolean类型**
 
+```javascript
+
+        var falseObject = new Boolean(false);
+        var result = falseObject && true;//这里的falseObject为对象，而不是它的值--false
+        alert(result);///true
+
+        var falseValue = false;
+        result = falseValue && true;
+        alert(result);    //false
+        
+        alert(typeof(falseObject)); //object
+        alert(typeof(falseValue));//boolean
+        alert(falseObject instanceof(Boolean)); //true
+        alert(falseValue instanceof(Boolean));//false
+```
+解析：
+（1）在布尔运算中，false&&true等于false，可是上述代码中是对falseObject这个对象进行求值，而不是它的值（false）进行求值。而在布尔表达式中的所有对象都会被转换成true，所有结果为true。
+（2）typeof操作符对引用类型（上述例子中的引用类型为falseObject）返回object；对基本类型返回boolean。其次，由于boolean对象是boolean类型的实例，所以用instanceof测试会返回true，而对基本类型为false。
+
+------------
+
+
+**Number类型**
+（1）`toFixed()`方法
+
+```javascript
+var num = 10;
+alert(num.toFixed(5));//10.00000
+var num1 = 10.005;
+alert(num1.toFixed(2));//10.01
+```
+（2）`toPrecision()`方法，接受一个参数，参数表示数字的位数
+
+```javascript
+var num = 99;
+alert(num.toPrecision(1));//1e+2用一位数表示99无法精确的表示，所以用100来代替
+alert(num.toPrecision(2));//99
+alert(num.toPrecision(3));//99.0三位数的99
+```
+（3）在使用typeof操作符测试基本类型数值的时候，会返回number，而测试number对象则返回object，类似的，number对象是number类型的实例，而基本类型不是
+
+------------
+
+
+**String类型**
+String类型的每个实例都有一个length属性，表示字符串包含多少个字符。
+
+（1）字符方法
+`charAt()`方法一单个字符串的形式返回给定位置的那个字符。
+`charCodeAt()`方法返回字符编码
+
+```javascript
+var string = "hello world";
+alert(string.charAt(2));//l
+alert(string.charCodeAt(2));//108
+```
+（2）字符串操作方法
 
 
 
